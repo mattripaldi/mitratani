@@ -13,13 +13,13 @@ class dftpenggunaController extends Controller
      */
     public function index()
     {
-    
+
         return view('dftpengguna');
     }
 
     public function formpengguna()
     {
-    
+
         return view('tambahpengguna');
     }
     /**
@@ -29,7 +29,11 @@ class dftpenggunaController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
 
     /**
