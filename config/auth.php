@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'pelanggan' => [
+            'driver' => 'passport',
+            'provider' => 'pelanggans',
+        ],
     ],
 
     /*
@@ -69,6 +74,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'pelanggans' => [
+            'driver' => 'eloquent',
+            'model' => App\Pelanggan::class,
         ],
 
         // 'users' => [
@@ -95,6 +105,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'pelanggans' => [
+            'provider' => 'pelanggans',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

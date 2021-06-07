@@ -17,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('login-pegawai', 'Api\Auth\UserController@login_pegawai');
+Route::post('register-pelanggan', 'Api\Auth\UserController@register_pelanggan');
+Route::post('login-pelanggan', 'Api\Auth\UserController@login_pelanggan');
+Route::post('register-pelanggan', 'Api\Auth\UserController@register_pelanggan');
+
+
+Route::group(['prefix' => 'pelanggan'], function () {
+    Route::group(['middleware' => 'auth:pelanggan'], function () {
+        Route::post('tambah-lahan', 'Api\Pelanggan\LahanPelangganController@tambah_lahan');
+    });
+});
