@@ -18,15 +18,18 @@ Route::get('/', function () {
 });
 Auth::routes(['register'=> false]);
 
-Route::get('/home','DftpenggunaController@index');
-Route::get('/dftpelanggan','DftpelangganController@index');
-Route::get('/dftbenihpadi','DftbenihpadiController@index');
-Route::get('/pesananbenih','PesananbenihController@index');
-Route::get('/jadwalmonitoring','JadwalmonitoringController@index');
-Route::get('/hasilmonitoring','HasilmonitoringController@index');
-Route::get('/tambahjadwal','JadwalmonitoringController@tambah');
-Route::get('/tambahbenih','DftbenihpadiController@formbenih');
-Route::get('/tambahpengguna','DftpenggunaController@formpengguna');
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
+    // Route::get('/', 'Admin\DashboardController@index');
+    Route::get('/dftpelanggan','DftpelangganController@index');
+    Route::get('/home','DftpenggunaController@index');
+    Route::get('/dftbenihpadi','DftbenihpadiController@index');
+    Route::get('/pesananbenih','PesananbenihController@index');
+    Route::get('/jadwalmonitoring','JadwalmonitoringController@index');
+    Route::get('/hasilmonitoring','HasilmonitoringController@index');
+    Route::get('/tambahjadwal','JadwalmonitoringController@tambah');
+    Route::get('/tambahbenih','DftbenihpadiController@formbenih');
+    Route::get('/tambahpengguna','DftpenggunaController@formpengguna');
+});
 
 
 
