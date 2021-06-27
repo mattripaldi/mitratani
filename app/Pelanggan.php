@@ -18,7 +18,7 @@ class Pelanggan extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'nik', 'password', 'nama_lengkap', 'alamat', 'telepon'
     ];
 
     /**
@@ -35,7 +35,7 @@ class Pelanggan extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 }
