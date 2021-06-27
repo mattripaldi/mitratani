@@ -18,11 +18,6 @@ class UserController extends Controller
             'password' => 'required '
         ]);
 
-        $login_detail = request([
-            'email',
-            'password'
-        ]);
-
         $user = User::where('name', $request->name)->first();
         if ($user) {
             if (password_verify($request->password, $user->password)){
@@ -33,9 +28,7 @@ class UserController extends Controller
                 return response()->json([
                     'access_token'  => $tokenResult->accessToken,
                     'token_id'      => $token->id,
-                    'user_id'       => $user->id,
-                    'name'          => $user->name,
-                    'email'         => $user->email
+                    'user'          => $user
                 ], 200);
             }
         }
@@ -67,26 +60,37 @@ class UserController extends Controller
     function register_pelanggan(Request $request)
     {
         $validateData   = Validator::make($request->all(), [
-            'name'      => 'required|unique:pelanggans',
-            'email'     => 'required|email|unique:pelanggans',
-            'password'  => 'required|min:8'
+            'name'          => 'required|unique:pelanggans',
+            'nama_lengkap'  => 'required',
+            'nik'           => 'required|unique:pelanggans',
+            'alamat'        => 'required',
+            'telepon'       => 'required',
+            'password'      => 'required|min:8'
         ]);
 
         if ($validateData->fails()) {
-            $val = $validateData->errors()->all();
+            $val = $validateData->errors()->first();
             return $this->error($val);
         }
 
         // create user
-        $pelanggan      =  Pelanggan::create([
-            'name'      => $request->get('name'),
-            'email'     => $request->get('email'),
-            'password'  => bcrypt($request->get('password'))
+        $pelanggan = Pelanggan::create([
+            'name'              => $request->get('name'),
+            'nama_lengkap'      => $request->get('nama_lengkap'),
+            'nik'               => $request->get('nik'),
+            'alamat'            => $request->get('alamat'),
+            'telepon'           => $request->get('telepon'),
+            'jenis_kelamin'     => $request->get('jenis_kelamin'),
+            'password'          => bcrypt($request->get('password'))
         ]);
 
         $pelanggan->save();
 
-        return response()->json($pelanggan, 201);
+        return response()->json([
+            'success'       => 1,
+            'message'       => 'selamat datang '.$pelanggan->name,
+            'pelanggan'     => $pelanggan
+        ]);;
     }
 
     public function error($pesan)
