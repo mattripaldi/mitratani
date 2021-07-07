@@ -11,7 +11,7 @@
   <div class="card-body">
   <div class="row">
   <div class="col mb-3 mr-0">
-        <a href="/tambahbenih" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Data Benih Padi</a>
+        <a href="/admin/tambahbenih" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Data Benih Padi</a>
   </div>
   <div class="mb-3 col-md-auto">
   <form action="/pegawai/cari" method="GET">

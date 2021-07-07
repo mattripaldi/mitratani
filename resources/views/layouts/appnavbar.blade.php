@@ -40,12 +40,14 @@
                     
                     
                         <div class="navbar-nav">
-                        <a class="nav-link {{Request::is('home')?'active':' '}} " href="/home">Daftar Pegawai<span class="sr-only">(current)</span></a>
-                        <a class="nav-link {{Request::is('dftpelanggan')?'active':' '}}" href="/dftpelanggan">Daftar Pelanggan</a>
-                        <a class="nav-link {{Request::is('dftbenihpadi')?'active':' '}}" href="/dftbenihpadi">Benih Padi</a>
-                        <a class="nav-link {{Request::is('pesananbenih')?'active':' '}}" href="/pesananbenih">Pesanan Benih</a>
-                        <a class="nav-link {{Request::is('jadwalmonitoring')?'active':' '}}" href="/jadwalmonitoring">Jadwal Monitoring</a>
-                        <a class="nav-link {{Request::is('hasilmonitoring')?'active':' '}}" href="/hasilmonitoring">Hasil Monitoring</a>
+                    @if(Auth::user()->role == 'admin')
+                        <a class="nav-link {{Request::is('home')?'active':' '}} " href="/admin/home">Daftar Pegawai<span class="sr-only">(current)</span></a>
+                        <a class="nav-link {{Request::is('dftpelanggan')?'active':' '}}" href="/admin/dftpelanggan">Daftar Pelanggan</a>
+                        <a class="nav-link {{Request::is('dftbenihpadi')?'active':' '}}" href="/admin/dftbenihpadi">Benih Padi</a>
+                        <a class="nav-link {{Request::is('pesananbenih')?'active':' '}}" href="/admin/pesananbenih">Pesanan Benih</a>
+                        <a class="nav-link {{Request::is('jadwalmonitoring')?'active':' '}}" href="/admin/jadwalmonitoring">Jadwal Monitoring</a>
+                        <a class="nav-link {{Request::is('hasilmonitoring')?'active':' '}}" href="/admin/hasilmonitoring">Hasil Monitoring</a>
+                    @endif
                         </div>
                     
                     </div>

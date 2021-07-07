@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class dftpenggunaController extends Controller
 {
@@ -13,8 +14,9 @@ class dftpenggunaController extends Controller
      */
     public function index()
     {
-
-        return view('dftpengguna');
+        // $user= User::all ();
+        $user = User::orderBy('id', 'Desc')->get();
+        return view('dftpengguna', compact('user'));
     }
 
     public function formpengguna()
@@ -36,6 +38,8 @@ class dftpenggunaController extends Controller
         ]);
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -44,7 +48,17 @@ class dftpenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'nik' => $request->nik,
+            'nama_lengkap' => $request->nama_lengkap,
+            'alamat' => $request->alamat,
+            'telepon' => $request->telepon,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'password' => bcrypt($request->get('password')),
+            'role' => $request->role,
+        ]);
+        return redirect('/admin/home');
     }
 
     /**
@@ -66,7 +80,9 @@ class dftpenggunaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::where('id',$id)->first();
+
+        return view('editpengguna',['detail'=>$data]);
     }
 
     /**
@@ -78,7 +94,19 @@ class dftpenggunaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pengguna = User::findorfail($id);
+
+        $pengguna->nama_lengkap = $request->nama_lengkap;
+        $pengguna->nik = $request->nik;
+        $pengguna->name = $request->name;
+        $pengguna->alamat = $request->alamat;
+        $pengguna->telepon = $request->telepon;
+        $pengguna->jenis_kelamin = $request->jenis_kelamin;
+        $pengguna->role = $request->role;
+
+        $pengguna->save();
+        
+        return redirect('admin/home');
     }
 
     /**

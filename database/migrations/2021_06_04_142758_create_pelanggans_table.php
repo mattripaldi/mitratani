@@ -16,11 +16,20 @@ class CreatePelanggansTable extends Migration
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nik')->nullable();
-            $table->string('nama_lengkap')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('telepon')->nullable();
-            $table->string('jenis_kelamin')->nullable();
+// <<<<<<< Updated upstream
+//             $table->string('nik')->nullable();
+//             $table->string('nama_lengkap')->nullable();
+//             $table->string('alamat')->nullable();
+//             $table->string('telepon')->nullable();
+//             $table->string('jenis_kelamin')->nullable();
+// =======
+            $table->string('nik');
+            $table->string('nama_lengkap');
+            $table->string('alamat');
+            $table->string('telepon');
+            $table->string('jenis_kelamin');
+            $table->timestamp('email_verified_at')->nullable();
+// >>>>>>> Stashed changes
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

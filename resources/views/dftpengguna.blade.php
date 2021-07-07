@@ -11,7 +11,7 @@
   <div class="card-body">
   <div class="row">
   <div class="col mb-3 mr-0">
-        <a href="/tambahpengguna" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Pegawai</a>
+        <a href="/admin/tambahpengguna" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Pegawai</a>
   </div>
   <div class="row">
   <div class="col mb-2">
@@ -29,30 +29,33 @@
   <thead class="thead-dark text-center">
     <tr>
       <th scope="col">No</th>
-      <th scope="col">Nama</th>
+      <th scope="col">Nama Lengkap</th>
       <th scope="col">Nik</th>
       <th scope="col">Username</th>
       <th scope="col">Telepon</th>
-      <th scope="col">Alamat</th>
+      <!-- <th scope="col">Alamat</th> -->
       <th scope="col">Jenis Kelamin</th>
       <th scope="col">Role</th>
       <th scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody class="text-center">
+    @foreach($user as $user)
     <tr>
-      <th scope="row">1</th>
-      <td>Lala</td>
-      <td>361855401026</td>
-      <td>lailaliany123</td>
-      <td>0822222222</td>
-      <td>cluring</td>
-      <td>perempuan</td>
-      <td>admin</td>
-      <td><button type="button" class="btn btn-warning btn-sm">Edit</button>
-      <button type="button" class="btn btn-warning btn-sm">Detail</button></td>
-
+      <th scope="row">{{$loop->iteration}}</th>
+      <td>{{$user->nama_lengkap}}</td>
+      <td>{{$user->nik}}</td>
+      <td>{{$user->name}}</td>
+      <td>{{$user->telepon}}</td>
+      <!-- <td>{{$user->alamat}}</td> -->
+      <td>{{$user->jenis_kelamin}}</td>
+      <td>{{$user->role}}</td>
+      <td>
+        <a href="{{ url('admin/editpengguna/'. $user->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
+        <button type="button" class="btn btn-warning btn-sm">Detail</button>
+      </td>
     </tr>
+    @endforeach
   </tbody>
 </table>
   </div>
