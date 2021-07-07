@@ -27,9 +27,14 @@ Route::post('register-pelanggan', 'Api\Auth\UserController@register_pelanggan');
 
 Route::group(['prefix' => 'pelanggan'], function () {
     Route::group(['middleware' => 'auth:pelanggan'], function () {
+
+        // Route lahan pelanggan
         Route::post('tambah-lahan', 'Api\Pelanggan\LahanPelangganController@tambahLahan');
         Route::get('data-lahan', 'Api\Pelanggan\LahanPelangganController@getLahan');
         Route::post('delete-lahan', 'Api\Pelanggan\LahanpelangganController@deleteLahan');
         Route::put('update-lahan/{id}', 'Api\Pelanggan\LahanPelangganController@updateLahan');
+    
+        // Routes varietas padi
+        Route::get('varietas', 'Api\Pelanggan\VarietasPadiController@index');
     });
 });

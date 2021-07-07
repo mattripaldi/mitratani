@@ -26,12 +26,16 @@ class UserController extends Controller
                 $token->save();
 
                 return response()->json([
+                    'success'       => 1,
+                    'message'       => 'selamat datang '.$user->name,
                     'access_token'  => $tokenResult->accessToken,
                     'token_id'      => $token->id,
-                    'user'          => $user
-                ], 200);
+                    'pegawai'       => $user
+                ]);
             }
+            return $this->error('Password Salah');
         }
+        return $this->error('Anda Tidak Terdaftar');
     }
 
     public function login_pelanggan(Request $request)
