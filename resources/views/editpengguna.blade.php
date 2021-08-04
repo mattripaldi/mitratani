@@ -6,7 +6,7 @@
 <div class="col-md-12">
 <div class="card mb-2">
   <div class="card-header text-center">
-   <strong>EDIT DATA PEGAWAI UD MITRA TANI</strong> 
+    <strong>EDIT DATA PEGAWAI UD MITRA TANI</strong> 
   </div>
   <div class="card-body">
   <form method="POST" action="{{ route('editpengguna',['id'=>$detail->id]) }}">

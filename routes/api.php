@@ -36,5 +36,9 @@ Route::group(['prefix' => 'pelanggan'], function () {
     
         // Routes varietas padi
         Route::get('varietas', 'Api\Pelanggan\VarietasPadiController@index');
+        Route::get('varietas/{id}', 'Api\Pelanggan\StokPadiController@index');
+
+        // Routes Pesanan
+        Route::post('pesan-benih', 'Api\Pelanggan\PesananController@store');
     });
 });
