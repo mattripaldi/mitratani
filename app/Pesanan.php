@@ -1,0 +1,28 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Pesanan extends Model
+{
+    /**
+     * Get the user associated with the Pesanan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lahan_pelanggan()
+    {
+        return $this->belongsTo(LahanPelanggan::class);
+    }
+
+    /**
+     * Get the stok_padi that owns the Pesanan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function stok_padi()
+    {
+        return $this->belongsTo(StokPadi::class);
+    }
+}
