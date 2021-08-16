@@ -11,7 +11,7 @@
   <div class="card-body">
   <div class="row">
   <div class="col mb-3 mr-0">
-        <a href="/tambahjadwal" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Jadwal</a>
+        <a href="/admin/tambahjadwal" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Jadwal</a>
   </div>
   <div class="mb-3 col-md-auto mt-1">
     <form action="/pegawai/cari" method="GET">
@@ -30,7 +30,9 @@
       <th scope="col">Tahap Vegetatif</th>
       <th scope="col">Tahap Berbunga</th>
       <th scope="col">Tahap Masak</th>
+      @if(Auth::user()->role == 'admin')
       <th scope="col">Aksi</th>
+      @endif
     </tr>
   </thead>
   <tbody class="text-center">
@@ -42,7 +44,10 @@
       <td>20/04/2021</td>
       <td>25/05/2021</td>
       <td>30/06/2021</td>
-      <td><button type="button" class="btn btn-warning btn-sm">Edit</button></td>
+      @if(Auth::user()->role == 'admin')
+      <td><button type="button" class="btn btn-warning btn-sm">Edit</button></td>            
+      @endif
+      
 
     </tr>
   </tbody>

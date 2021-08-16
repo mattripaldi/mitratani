@@ -24,6 +24,20 @@ class dftpenggunaController extends Controller
 
         return view('tambahpengguna');
     }
+
+    public function detailpengguna($id)
+    {
+        $data = User::where('id',$id)->first();
+        return view('detailpengguna', compact('data'));
+    }
+   
+    public function cari(Request $request)
+    {
+        $cari = $request->input('cari');
+        $user= User::where('nama_lengkap', 'like', "%" . $cari ."%")->get();
+
+        return view('dftpengguna', compact('user'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -48,6 +62,11 @@ class dftpenggunaController extends Controller
      */
     public function store(Request $request)
     {
+        $nm = $request->foto_varietas;
+        $namafile = $nm->getClientOriginalName();
+
+        $dtupload = 
+
         User::create([
             'name' => $request->name,
             'nik' => $request->nik,

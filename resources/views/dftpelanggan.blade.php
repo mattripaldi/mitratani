@@ -10,7 +10,7 @@
   </div>
   <div class="card-body">
   <div class="mb-3 col-md-auto">
-  <form action="/pegawai/cari" method="GET">
+  <form action="/admin/pelanggan/cari" method="GET">
 		<input type="text" name="cari" placeholder="Cari">
 		<input type="submit" value="Cari">
 	</form>
@@ -28,15 +28,17 @@
     </tr>
   </thead>
   <tbody class="text-center">
+  @foreach($pelanggan as $pelanggan)
     <tr>
-      <th scope="row">1</th>
-      <td>Liany</td>
-      <td>361855401026</td>
-      <td>liany123</td>
-      <td>082232134556</td>
-      <td>cluring</td>
-      <td>perempuan</td>
+      <th scope="row">{{$loop->iteration}}</th>
+      <td>{{$pelanggan->name}}</td>
+      <td>{{$pelanggan->nik}}</td>
+      <td>{{$pelanggan->nama_lengkap}}</td>
+      <td>{{$pelanggan->alamat}}</td>
+      <td>{{$pelanggan->telepon}}</td>
+      <td>{{$pelanggan->jenis_kelamin}}</td>
     </tr>
+  @endforeach
   </tbody>
 </table>
   </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pelanggan;
 
 class DftpelangganController extends Controller
 {
@@ -13,8 +14,16 @@ class DftpelangganController extends Controller
      */
     public function index()
     {
-    
-        return view('dftpelanggan');
+        $pelanggan = Pelanggan::all();
+        return view('dftpelanggan', compact('pelanggan'));
+    }
+
+    public function cari(Request $request)
+    {
+        $cari = $request->input('cari');
+        $pelanggan= Pelanggan::where('nama_lengkap', 'like', "%" . $cari ."%")->get();
+        
+        return view('dftpelanggan', compact('pelanggan'));
     }
 
     /**

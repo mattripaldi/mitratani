@@ -14,7 +14,7 @@
         <a href="/admin/tambahbenih" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Data Benih Padi</a>
   </div>
   <div class="mb-3 col-md-auto">
-  <form action="/pegawai/cari" method="GET">
+  <form action="/admin/stok/cari" method="GET">
 		<input type="text" name="cari" placeholder="Cari">
 		<input type="submit" value="Cari">
 	</form>
@@ -26,7 +26,8 @@
       <th scope="col">No</th>
       <th scope="col">Nama Varietas</th>
       <th scope="col">Supplier</th>
-      <th scope="col">Asal Benih</th>
+      <th scope="col">Kelas Benih</th>
+      <th scope="col">Label</th>
       <th scope="col">Stok</th>
       <th scope="col">Tanggal Beli</th>
       <th scope="col">Tanggal Kadaluwarsa</th>
@@ -37,20 +38,22 @@
     </tr>
   </thead>
   <tbody class="text-center">
+  @foreach($stok as $stok)
     <tr>
-      <th scope="row">1</th>
-      <td>Inbrida</td>
-      <td>PT Pertani</td>
-      <td>Banyuwangi</td>
-      <td>20</td>
-      <td>10/03/2021</td>
-      <td>15/09/2021</td>
-      <td>Rp 125.000</td>
-      <td>Rp 150.000</td>
-      <td>Rp 25.000</td>
-      <td><button type="button" class="btn btn-warning btn-sm">Edit</button></td>
-
+      <th scope="row">{{$loop->iteration}}</th>
+      <td>{{$stok->nama_varietas}}</td>
+      <td>{{$stok->supplier_benih}}</td>
+      <td>{{$stok->kelas_benih}}</td>
+      <td>{{$stok->label}}</td>
+      <td>{{$stok->jumlah_stok}}</td>
+      <td>{{$stok->tanggal_beli_benih}}</td>
+      <td>{{$stok->tanggal_kadaluarsa}}</td>
+      <td>{{$stok->harga_beli_sak}}</td>
+      <td>{{$stok->harga_jual_sak}}</td>
+      <td>{{$stok->harga_jual_kg}}</td>
+      <td><a href="{{ url('admin/editbenih/'. $stok->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>
     </tr>
+    @endforeach
   </tbody>
 </table>
   </div>
