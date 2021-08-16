@@ -23,6 +23,6 @@ class StokPadi extends Model
      */
     public function varietas_padi()
     {
-        return $this->belongsTo(VarietasPadi::class);
+        return $this->belongsTo(VarietasPadi::class, 'id_varietas_padi');
     }
 }

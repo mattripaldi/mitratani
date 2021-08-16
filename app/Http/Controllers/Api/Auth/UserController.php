@@ -94,7 +94,7 @@ class UserController extends Controller
             'success'       => 1,
             'message'       => 'selamat datang '.$pelanggan->name,
             'pelanggan'     => $pelanggan
-        ]);;
+        ]);
     }
 
     public function error($pesan)

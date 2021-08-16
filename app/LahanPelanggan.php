@@ -15,4 +15,14 @@ class LahanPelanggan extends Model
     {
         return $this->hasMany(Pesanan::class, 'lahan_pelanggan_id', 'id');
     }
+
+    /**
+     * Get the pelanggans that owns the LahanPelanggan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class);
+    }
 }

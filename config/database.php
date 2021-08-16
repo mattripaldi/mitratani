@@ -91,7 +91,15 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'dbal' => [
+            'types' => [
+                'timestamp' => TimestampType::class,
+            ],
+        ],
+
     ],
+
+    
 
     /*
     |--------------------------------------------------------------------------

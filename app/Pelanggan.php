@@ -38,4 +38,14 @@ class Pelanggan extends Authenticatable
     // protected $casts = [
     //     'email_verified_at' => 'datetime',
     // ];
+
+    /**
+     * Get all of the lahan_pelanggans for the Pelanggan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lahan_pelanggans()
+    {
+        return $this->hasMany(LahanPelanggan::class, 'pelanggan_id', 'id');
+    }
 }

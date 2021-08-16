@@ -25,14 +25,12 @@ class LahanPelangganController extends Controller
             return $this->error($val);
         }
 
-        $pelanggan = auth()->user()->id;
-
         $data_lahan = new LahanPelanggan;
         $data_lahan->nama_lahan     = $request->nama_lahan;
         $data_lahan->alamat         = $request->alamat;
         $data_lahan->luas_lahan     = $request->luas_lahan;
         $data_lahan->sejarah_lahan  = $request->sejarah_lahan;
-        $data_lahan->id_pelanggan   = $pelanggan;
+        $data_lahan->pelanggan_id   = auth()->user()->id;;
         $data_lahan->save();
 
         return response()->json([
@@ -45,7 +43,7 @@ class LahanPelangganController extends Controller
     public function getLahan()
     {
         $dataLahan = DB::table('lahan_pelanggans')
-            ->where('id_pelanggan', '=' ,auth()->user()->id)
+            ->where('pelanggan_id', '=' ,auth()->user()->id)
             ->get();
 
             // $users = DB::table('users')

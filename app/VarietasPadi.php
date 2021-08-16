@@ -13,6 +13,6 @@ class VarietasPadi extends Model
      */
     public function stok_padi()
     {
-        return $this->hasMany(StokPadi::class);
+        return $this->hasMany(StokPadi::class, 'id_varietas_padi', 'id');
     }
 }
