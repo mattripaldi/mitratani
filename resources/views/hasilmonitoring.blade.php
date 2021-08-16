@@ -34,14 +34,22 @@
       <td>Cluring</td>
       <td>
         <button type="button" class="btn btn-warning btn-sm"><i class='fas fa-file-alt'></i></button>
+        <!-- @if(Auth::user()->role == 'admin')
         <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button>
+        @endif -->
       </td>
       <td><button type="button" class="btn btn-warning btn-sm"><i class='fas fa-file-alt'></i></button>
+      <!-- @if(Auth::user()->role == 'admin')
       <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button></td>
+      @endif -->
       <td><button type="button" class="btn btn-warning btn-sm"><i class='fas fa-file-alt'></i></button>
+      <!-- @if(Auth::user()->role == 'admin')
       <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button></td>
+      @endif -->
       <td><button type="button" class="btn btn-warning btn-sm"><i class='fas fa-file-alt'></i></button>
+      <!-- @if(Auth::user()->role == 'admin')
       <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button></td>
+      @endif -->
       <!-- <td><i class="fas fa-check-square" style='font-size:24px;color:green'></i></td> -->
     </tr>
   </tbody>

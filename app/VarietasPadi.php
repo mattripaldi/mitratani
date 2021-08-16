@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class VarietasPadi extends Model
 {
+    protected $table = 'varietas_padis';
+    protected $fillable =['id_varietas', 'nama_varietas', 'deskripsi_varietas', 'foto_varietas'];
+
     /**
      * Get all of the stok_padi for the VarietasPadi
      *

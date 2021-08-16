@@ -18,9 +18,9 @@
         <a href="/tambahpengguna" class="btn btn-success btn-sm"> <i class="fas fa-print"></i> Cetak</a>
   </div>
   <div class="mb-3 col-md-auto mr-3">
-  <form action="/pegawai/cari" method="GET">
+  <form action="/admin/home/cari" method="get">
 		<input type="text" name="cari" placeholder="Cari">
-		<input type="submit" value="Cari">
+		<button type="submit" value="Cari">Cari</button>
 	</form>
   </div>
   </div>
@@ -32,9 +32,9 @@
       <th scope="col">Nama Lengkap</th>
       <th scope="col">Nik</th>
       <th scope="col">Username</th>
-      <th scope="col">Telepon</th>
-      <!-- <th scope="col">Alamat</th> -->
-      <th scope="col">Jenis Kelamin</th>
+      <!-- <th scope="col">Telepon</th>
+      <th scope="col">Alamat</th>
+      <th scope="col">Jenis Kelamin</th> -->
       <th scope="col">Role</th>
       <th scope="col">Aksi</th>
     </tr>
@@ -46,13 +46,13 @@
       <td>{{$user->nama_lengkap}}</td>
       <td>{{$user->nik}}</td>
       <td>{{$user->name}}</td>
-      <td>{{$user->telepon}}</td>
-      <!-- <td>{{$user->alamat}}</td> -->
-      <td>{{$user->jenis_kelamin}}</td>
+      <!-- <td>{{$user->telepon}}</td>
+      <td>{{$user->alamat}}</td>
+      <td>{{$user->jenis_kelamin}}</td> -->
       <td>{{$user->role}}</td>
       <td>
         <a href="{{ url('admin/editpengguna/'. $user->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
-        <button type="button" class="btn btn-warning btn-sm">Detail</button>
+        <a href="{{ url('admin/detailpengguna/'. $user->id) }}" class="btn btn-warning btn-sm">Detail</a>
       </td>
     </tr>
     @endforeach

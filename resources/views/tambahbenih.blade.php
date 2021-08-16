@@ -9,42 +9,51 @@
    <strong>DATA BENIH PADI UD MITRA TANI</strong> 
   </div>
   <div class="card-body">
-  <form>
+  <form method="POST" action="{{route('stokbenih.store')}}">
+  @csrf
     <div class="form-group">
         <label for="formGroupExampleInput">Nama Varietas</label>
-        <input type="text" class="form-control" id="text" >
+        <select class="form-control" name="nama_varietas">
+        @foreach($varietas as $varietas)
+            <option value ="{{ $varietas->id}}">{{$varietas->nama_varietas}}</option>
+        @endforeach
+        </select>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Supplier</label>
-        <input type="text" class="form-control" id="text" >
+        <input type="text" class="form-control" id="supplier_benih" name="supplier_benih">
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Asal Benih</label>
-        <input type="text" class="form-control" id="text" >
+        <label for="formGroupExampleInput">Kelas Benih</label>
+        <input type="text" class="form-control" id="tkelas_benih" name="kelas_benih">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Label Benih</label>
+        <input type="text" class="form-control" id="label" name="label" >
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Stok</label>
-        <input type="text" class="form-control" id="text" >
+        <input type="text" class="form-control" id="jumlah_stok" name="jumlah_stok">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Tanggal Beli</label>
-        <input type="date" class="form-control" id="date" >
+        <input type="date" class="form-control" id="tanggal_beli_benih" name="tanggal_beli_benih">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Tanggal Kadaluwarsa</label>
-        <input type="date" class="form-control" id="date" >
+        <input type="date" class="form-control" id="tanggal_kadaluarsa" name="tanggal_kadaluarsa" >
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Harga Benih</label>
-        <input type="text" class="form-control" id="text" >
+        <input type="text" class="form-control" id="harga_beli_sak" name="harga_beli_sak">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Harga Jual</label>
-        <input type="text" class="form-control" id="text" >
+        <input type="text" class="form-control" id="harga_jual_sak" name="harga_jual_sak">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Harga Jual/Kg</label>
-        <input type="text" class="form-control" id="text" >
+        <input type="text" class="form-control" id="harga_jual_kg" name="harga_jual_kg">
     </div>
     <div class="form-group row">
         <div class="col-sm-10">

@@ -52,6 +52,10 @@
         <option>Petugas Lapang</option>
       </select>
     </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Foto</label>
+        <input type="file" class="form-control-file" id="foto_varietas" name="foto_varietas" >
+    </div>
 
     <div class="form-group row">
         <div class="col-sm-10">
