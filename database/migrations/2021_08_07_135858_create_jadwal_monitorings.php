@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJadwalMonitoring extends Migration
+class CreateJadwalMonitorings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateJadwalMonitoring extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal_monitoring', function (Blueprint $table) {
+        Schema::create('jadwal_monitorings', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_induk_pesanan')->unique();
             $table->date('fase_pendahuluan');
             $table->date('fase_vegetatif');
             $table->date('fase_berbunga');
@@ -31,6 +32,6 @@ class CreateJadwalMonitoring extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwal_monitoring');
+        Schema::dropIfExists('jadwal_monitorings');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +34,7 @@ Route::group(['prefix' => 'pelanggan'], function () {
         Route::get('data-lahan', 'Api\Pelanggan\LahanPelangganController@getLahan');
         Route::post('delete-lahan', 'Api\Pelanggan\LahanpelangganController@deleteLahan');
         Route::put('update-lahan/{id}', 'Api\Pelanggan\LahanPelangganController@updateLahan');
-    
+
         // Routes varietas padi
         Route::get('varietas', 'Api\Pelanggan\VarietasPadiController@index');
         Route::get('varietas/{id}', 'Api\Pelanggan\StokPadiController@index');
@@ -42,5 +43,11 @@ Route::group(['prefix' => 'pelanggan'], function () {
         Route::post('pesan-benih', 'Api\Pelanggan\PesananController@store');
         Route::get('detail-pesanan/{id}', 'Api\Pelanggan\PesananController@Show');
         Route::get('pesanans', 'Api\Pelanggan\PesananController@index');
+    });
+});
+
+Route::prefix('petugas')->group(function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('jadwal-monitoring', 'Api\Petugas\JadwalMonitoringController@index');
     });
 });
