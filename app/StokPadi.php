@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class StokPadi extends Model
 {
     protected $table = 'stok_padis';
+<<<<<<< Updated upstream
     protected $fillable = [
         'id', 'id_varietas_padi', 'supplier_benih', 'kelas_benih', 'tanggal_kadaluarsa', 'tanggal_beli_benih',
         'harga_beli_sak', 'harga_jual_sak', 'harga_jual_kg', 'jumlah_stok', 'label'
     ];
+=======
+    protected $fillable =['id','id_varietas_padi','supplier_benih','kelas_benih','tanggal_kadaluarsa','tanggal_beli_benih',
+    'harga_beli_sak','harga_jual_sak','harga_jual_kg','jumlah_stok', 'label'];
+>>>>>>> Stashed changes
     /**
      * Get all of the stok_padi for the StokPadi
      *

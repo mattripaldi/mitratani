@@ -17,6 +17,9 @@ class PesananbenihController extends Controller
         return view('pesananbenih');
     }
 
+
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,7 +49,7 @@ class PesananbenihController extends Controller
      */
     public function show($id)
     {
-        //
+    //    $pesanan->lahan_pelanggan
     }
 
     /**
