@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Petugas;
 
 use App\Http\Controllers\Controller;
 use App\JadwalMonitoring;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JadwalMonitoringController extends Controller
@@ -13,13 +14,75 @@ class JadwalMonitoringController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getJadwalFaseAwal()
     {
-        $jadwal = JadwalMonitoring::all();
+        $now = Carbon::now();
+
+        $jadwal = JadwalMonitoring::select('id', 'nomor_induk_pesanan', 'fase_pendahuluan', 'pesanan_id')
+            ->whereYear('fase_pendahuluan', '=', $now->year)
+            ->whereMonth('fase_pendahuluan', '=', $now->month)
+            ->orderBy('fase_pendahuluan', 'ASC')
+            ->with('pesanan.lahan_pelanggan.pelanggan')
+            ->get();
 
         return response()->json([
-            "success" => 1,
-            "message" => "Daftar Jadwal",
+            "success"           => 1,
+            "message"           => "Daftar Jadwal",
+            "jadwal_monitoring" => $jadwal
+        ]);
+    }
+
+    public function getJadwalFaseVegetatif()
+    {
+        $now = Carbon::now();
+
+        $jadwal = JadwalMonitoring::select('id', 'nomor_induk_pesanan', 'fase_vegetatif', 'pesanan_id')
+            ->whereYear('fase_vegetatif', '=', $now->year)
+            ->whereMonth('fase_vegetatif', '=', $now->month)
+            ->orderBy('fase_vegetatif', 'ASC')
+            ->with('pesanan.lahan_pelanggan.pelanggan')
+            ->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "Daftar Jadwal",
+            "jadwal_monitoring" => $jadwal
+        ]);
+    }
+
+    public function getJadwalFaseBerbunga()
+    {
+        $now = Carbon::now();
+        $jadwal = JadwalMonitoring::select('id', 'nomor_induk_pesanan', 'fase_berbunga', 'pesanan_id')
+            ->whereYear('fase_berbunga', '=', $now->year)
+            ->whereMonth('fase_berbunga', '=', $now->month)
+            ->orderBy('fase_berbunga', 'ASC')
+            ->with('pesanan.lahan_pelanggan.pelanggan')
+            ->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "Daftar Jadwal",
+            "fase"              => "Fase Berbunga",
+            "jadwal_monitoring" => $jadwal
+        ]);
+    }
+
+    public function getJadwalFaseMasak()
+    {
+        $now = Carbon::now();
+
+        $jadwal = JadwalMonitoring::select('id', 'nomor_induk_pesanan', 'fase_masak', 'pesanan_id')
+            ->whereYear('fase_masak', '=', $now->year)
+            ->whereMonth('fase_masak', '=', $now->month)
+            ->orderBy('fase_berbunga', 'ASC')
+            ->with('pesanan.lahan_pelanggan.pelanggan')
+            ->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "Daftar Jadwal",
+            "fase"              => "Fase Masak",
             "jadwal_monitoring" => $jadwal
         ]);
     }

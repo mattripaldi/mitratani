@@ -25,4 +25,14 @@ class Pesanan extends Model
     {
         return $this->belongsTo(StokPadi::class);
     }
+
+    /**
+     * Get the jadwal_monitoring associated with the Pesanan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function jadwal_monitoring()
+    {
+        return $this->hasOne(JadwalMonitoring::class, 'pesanan_id', 'id');
+    }
 }

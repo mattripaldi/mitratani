@@ -24,7 +24,7 @@ class PesananController extends Controller
             ->join('lahan_pelanggans', 'lahan_pelanggans.id', '=', 'pesanans.lahan_pelanggan_id')
             ->join('pelanggans', 'pelanggans.id', '=', 'lahan_pelanggans.pelanggan_id')
             ->where('pelanggans.id', '=', auth()->user()->id)
-            ->select('pesanans.*', 'lahan_pelanggans.*')
+            ->select('pesanans.*', 'lahan_pelanggans.nama_lahan')
             ->get();
 
         return response()->json([
@@ -75,6 +75,7 @@ class PesananController extends Controller
         $pesanan->total_biaya = $jumlahBiaya;
         $pesanan->lahan_pelanggan_id = $request->lahan_pelanggan_id;
         $pesanan->stok_padi_id = $stokPadi->id;
+        $pesanan->status_pesanan = "Menunggu Pembayaran";
         $pesanan->save();
 
 
