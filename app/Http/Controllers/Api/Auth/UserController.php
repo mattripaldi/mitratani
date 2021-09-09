@@ -20,14 +20,14 @@ class UserController extends Controller
 
         $user = User::where('name', $request->name)->first();
         if ($user) {
-            if (password_verify($request->password, $user->password)){
+            if (password_verify($request->password, $user->password)) {
                 $tokenResult = $user->createToken('AccessToken');
                 $token = $tokenResult->token;
                 $token->save();
 
                 return response()->json([
                     'success'       => 1,
-                    'message'       => 'selamat datang '.$user->name,
+                    'message'       => 'selamat datang ' . $user->name,
                     'access_token'  => $tokenResult->accessToken,
                     'token_id'      => $token->id,
                     'pegawai'       => $user
@@ -40,6 +40,16 @@ class UserController extends Controller
 
     public function login_pelanggan(Request $request)
     {
+        $validateData   = Validator::make($request->all(), [
+            'name'          => 'required',
+            'password'      => 'required',
+        ]);
+
+        if ($validateData->fails()) {
+            $val = $validateData->errors()->first();
+            return $this->error($val);
+        }
+
         $pelanggan = Pelanggan::where('name', $request->name)->first();
         if ($pelanggan) {
             if (password_verify($request->password, $pelanggan->password)) {
@@ -50,7 +60,7 @@ class UserController extends Controller
 
                 return response()->json([
                     'success'       => 1,
-                    'message'       => 'selamat datang '.$pelanggan->name,
+                    'message'       => 'selamat datang ' . $pelanggan->name,
                     'access_token'  => $tokenResult->accessToken,
                     'token_id'      => $token->id,
                     'pelanggan'     => $pelanggan
@@ -64,12 +74,12 @@ class UserController extends Controller
     function register_pelanggan(Request $request)
     {
         $validateData   = Validator::make($request->all(), [
-            'name'          => 'required|unique:pelanggans',
             'nama_lengkap'  => 'required',
+            'name'          => 'required|unique:pelanggans',
+            'password'      => 'required|min:8',
             'nik'           => 'required|unique:pelanggans',
             'alamat'        => 'required',
             'telepon'       => 'required',
-            'password'      => 'required|min:8'
         ]);
 
         if ($validateData->fails()) {
@@ -92,7 +102,7 @@ class UserController extends Controller
 
         return response()->json([
             'success'       => 1,
-            'message'       => 'selamat datang '.$pelanggan->name,
+            'message'       => 'selamat datang ' . $pelanggan->name,
             'pelanggan'     => $pelanggan
         ]);
     }

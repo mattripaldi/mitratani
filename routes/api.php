@@ -48,6 +48,11 @@ Route::group(['prefix' => 'pelanggan'], function () {
 
 Route::prefix('petugas')->group(function () {
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('jadwal-monitoring', 'Api\Petugas\JadwalMonitoringController@index');
+        // Routes Jadwal
+        Route::get('jadwal-monitoring-fase-awal', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseAwal');
+        Route::get('jadwal-monitoring-fase-vegetatif', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseVegetatif');
+        Route::get('jadwal-monitoring-fase-berbunga', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseBerbunga');
+        Route::get('jadwal-monitoring-fase-masak', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseMasak');
+        Route::get('jadwal-monitoring-fase', 'Api\Petugas\JadwalMonitoringController@getAllJadwal');
     });
 });
