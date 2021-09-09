@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\Petugas;
 
 use App\Http\Controllers\Controller;
 use App\JadwalMonitoring;
+use App\Pesanan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JadwalMonitoringController extends Controller
 {
@@ -17,7 +19,6 @@ class JadwalMonitoringController extends Controller
     public function getJadwalFaseAwal()
     {
         $now = Carbon::now();
-
         $jadwal = JadwalMonitoring::select('id', 'nomor_induk_pesanan', 'fase_pendahuluan', 'pesanan_id')
             ->whereYear('fase_pendahuluan', '=', $now->year)
             ->whereMonth('fase_pendahuluan', '=', $now->month)
@@ -84,6 +85,82 @@ class JadwalMonitoringController extends Controller
             "message"           => "Daftar Jadwal",
             "fase"              => "Fase Masak",
             "jadwal_monitoring" => $jadwal
+        ]);
+    }
+
+    public function getMonitoringAwalToday()
+    {
+        $today = Carbon::now();
+        $jadwal = Pesanan::select('pesanans.*')
+            ->join('jadwal_monitorings', 'jadwal_monitorings.pesanan_id', '=', 'pesanans.id')
+            ->whereDate('jadwal_monitorings.fase_pendahuluan', '=', $today)
+            ->where('pesanans.status_pesanan', '=', 'Lunas')
+            ->with('lahan_pelanggan.pelanggan')
+            ->get();
+
+        // $jadwal = JadwalMonitoring::whereDate('fase_pendahuluan', '=', $today)->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "success get monitoring awal today",
+            "monitoring"        => $jadwal
+        ]);
+    }
+
+    public function getMonitoringVegetatifToday()
+    {
+        $today = Carbon::now();
+        $jadwal = Pesanan::select('pesanans.*')
+            ->join('jadwal_monitorings', 'jadwal_monitorings.pesanan_id', '=', 'pesanans.id')
+            ->whereDate('jadwal_monitorings.fase_vegetatif', '=', $today)
+            ->where('pesanans.status_pesanan', '=', 'Fase Pendahuluan')
+            ->with('lahan_pelanggan.pelanggan')
+            ->get();
+
+        // $jadwal = JadwalMonitoring::whereDate('fase_pendahuluan', '=', $today)->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "success get monitoring vegetatif today",
+            "monitoring"        => $jadwal
+        ]);
+    }
+
+    public function getMonitoringBerbungaToday()
+    {
+        $today = Carbon::now();
+        $jadwal = Pesanan::select('pesanans.*')
+            ->join('jadwal_monitorings', 'jadwal_monitorings.pesanan_id', '=', 'pesanans.id')
+            ->whereDate('jadwal_monitorings.fase_berbunga', '=', $today)
+            ->where('pesanans.status_pesanan', '=', 'Fase Vegetatif')
+            ->with('lahan_pelanggan.pelanggan')
+            ->get();
+
+        // $jadwal = JadwalMonitoring::whereDate('fase_pendahuluan', '=', $today)->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "success get monitoring berbunga today",
+            "monitoring"        => $jadwal
+        ]);
+    }
+
+    public function getMonitoringMasakToday()
+    {
+        $today = Carbon::now();
+        $jadwal = Pesanan::select('pesanans.*')
+            ->join('jadwal_monitorings', 'jadwal_monitorings.pesanan_id', '=', 'pesanans.id')
+            ->whereDate('jadwal_monitorings.fase_masak', '=', $today)
+            ->where('pesanans.status_pesanan', '=', 'Fase Berbunga')
+            ->with('lahan_pelanggan.pelanggan')
+            ->get();
+
+        // $jadwal = JadwalMonitoring::whereDate('fase_pendahuluan', '=', $today)->get();
+
+        return response()->json([
+            "success"           => 1,
+            "message"           => "success get monitoring berbunga today",
+            "monitoring"        => $jadwal
         ]);
     }
 

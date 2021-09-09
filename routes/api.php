@@ -23,7 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login-pegawai', 'Api\Auth\UserController@login_pegawai');
 Route::post('register-pelanggan', 'Api\Auth\UserController@register_pelanggan');
 Route::post('login-pelanggan', 'Api\Auth\UserController@login_pelanggan');
-Route::post('register-pelanggan', 'Api\Auth\UserController@register_pelanggan');
 
 
 Route::group(['prefix' => 'pelanggan'], function () {
@@ -54,5 +53,13 @@ Route::prefix('petugas')->group(function () {
         Route::get('jadwal-monitoring-fase-berbunga', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseBerbunga');
         Route::get('jadwal-monitoring-fase-masak', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseMasak');
         Route::get('jadwal-monitoring-fase', 'Api\Petugas\JadwalMonitoringController@getAllJadwal');
+
+        // monitoring
+        Route::get('get-monitoring-awal-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringAwalToday');
+        Route::get('get-monitoring-vegetatif-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringVegetatifToday');
+        Route::get('get-monitoring-berbunga-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringBerbungaToday');
+
+
+        Route::post('monitoring-awal', 'Api\Petugas\MonitoringPadiController@monitoringAwal');
     });
 });

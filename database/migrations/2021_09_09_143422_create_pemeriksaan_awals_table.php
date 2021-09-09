@@ -17,13 +17,13 @@ class CreatePemeriksaanAwalsTable extends Migration
             $table->id();
             $table->foreignId('users_id');
             $table->foreignId('lahan_pelanggan_id');
-            $table->boolean('kebenaran_letak_areal');
-            $table->boolean('kebenaran_luas_arel');
-            $table->boolean('isolasi');
-            $table->boolean('sejarah_lapang');
-            $table->boolean('asal_jumlah_benih');
-            $table->text('catatan');
-            $table->string('kesimpulan');
+            $table->string('letak_areal')->default('salah');
+            $table->string('luas_areal')->default('salah');
+            $table->string('isolasi')->default('salah');
+            $table->string('sejarah_lapang')->default('salah');
+            $table->string('asal_jumlah_benih')->default('salah');
+            $table->text('catatan')->default('Tanam Benih Sesuai Rencana');
+            $table->string('kesimpulan')->nullable();
             $table->timestamps();
         });
     }

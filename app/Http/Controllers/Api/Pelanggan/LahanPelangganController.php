@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\LahanPelanggan;
 use App\Pelanggan;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class LahanPelangganController extends Controller
 {
@@ -92,7 +92,7 @@ class LahanPelangganController extends Controller
         ]);
     }
 
-    
+
 
     public function error($pesan)
     {
