@@ -12,7 +12,7 @@
     
     <div class="card">
       <div class="foto text-center mt-3">
-        <img src="{{ ('/img/123.jpg') }}"  class="card-img-top rounded " style="width: 200px;">
+        <img src="{{ asset('images/'.$data->foto) }}"  class="card-img-top rounded " style="width: 200px;">
       </div>
 
   <table class="table table-bordered mt-3" >

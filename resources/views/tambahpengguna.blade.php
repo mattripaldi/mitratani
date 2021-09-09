@@ -9,7 +9,7 @@
    <strong>DATA PEGAWAI UD MITRA TANI</strong> 
   </div>
   <div class="card-body">
-  <form method="POST" action="{{route('pengguna.store')}}">
+  <form method="POST" action="{{route('pengguna.store')}}" enctype="multipart/form-data">
   @csrf
     <div class="form-group">
         <label for="formGroupExampleInput">Nama Lengkap</label>
@@ -52,9 +52,10 @@
         <option>Petugas Lapang</option>
       </select>
     </div>
+    
     <div class="form-group">
         <label for="formGroupExampleInput">Foto</label>
-        <input type="file" class="form-control-file" id="foto_varietas" name="foto_varietas" >
+        <input type="file" class="form-control-file" id="foto" name="foto" >
     </div>
 
     <div class="form-group row">

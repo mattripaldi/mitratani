@@ -17,6 +17,13 @@ class HasilmonitoringController extends Controller
         return view('hasilmonitoring');
     }
 
+    public function detailfasependahuluan()
+    {
+        // $data = User::where('id',$id)->first();
+        return view('detailfasependahuluan');
+    }
+   
+
     /**
      * Show the form for creating a new resource.
      *

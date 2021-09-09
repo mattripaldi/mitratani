@@ -62,11 +62,20 @@ class dftpenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        $nm = $request->foto_varietas;
-        $namafile = $nm->getClientOriginalName();
-
-        $dtupload = 
-
+        $request->validate ([
+            'name' => 'required',
+            'nik' => 'required',
+            'nama_lengkap' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'jenis_kelamin' => 'required',
+            'foto' => 'mimes:jpeg,png,jpg,gif',
+            'password' => 'required',
+            'role' => 'required', 
+        ]);
+        if($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $file->move('images',$file->getClientOriginalName());
         User::create([
             'name' => $request->name,
             'nik' => $request->nik,
@@ -74,9 +83,11 @@ class dftpenggunaController extends Controller
             'alamat' => $request->alamat,
             'telepon' => $request->telepon,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'foto' => $file->getClientOriginalName(),
             'password' => bcrypt($request->get('password')),
             'role' => $request->role,
         ]);
+    }
         return redirect('/admin/home');
     }
 
@@ -122,8 +133,15 @@ class dftpenggunaController extends Controller
         $pengguna->telepon = $request->telepon;
         $pengguna->jenis_kelamin = $request->jenis_kelamin;
         $pengguna->role = $request->role;
-
         $pengguna->save();
+        
+        if($request->hasFile('foto')) {
+            
+            $file = $request->file('foto');
+            $file->move('images',$file->getClientOriginalName());
+            User::findorfail($id)->update(["foto"=>$file->getClientOriginalName()]);
+
+        }
         
         return redirect('admin/home');
     }

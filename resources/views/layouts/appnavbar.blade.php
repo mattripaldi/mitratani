@@ -16,11 +16,12 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    
+    <!-- /cssbootstrap/ -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" > -->
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- /cssbootstrap/ -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!-- /icon -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -38,21 +39,22 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
-                    
+                {{ Request::segment(1) === 'jadwalmonitoring' ? 'active' : null }}"
                         <div class="navbar-nav">
                     @if(Auth::user()->role == 'admin')
-                        <a class="nav-link {{Request::is('home')?'active':' '}} " href="/admin/home">Daftar Pegawai<span class="sr-only">(current)</span></a>
-                        <a class="nav-link {{Request::is('dftpelanggan')?'active':' '}}" href="/admin/dftpelanggan">Daftar Pelanggan</a>
-                        <a class="nav-link {{Request::is('dftbenihpadi')?'active':' '}}" href="/admin/dftbenihpadi">Stok Padi</a>
-                        <a class="nav-link {{Request::is('dftvarietaspadi')?'active':' '}}" href="/admin/dftvarietaspadi">Varietas Padi</a>
-                        <a class="nav-link {{Request::is('pesananbenih')?'active':' '}}" href="/admin/pesananbenih">Pesanan Benih</a>
-                        <a class="nav-link {{Request::is('jadwalmonitoring')?'active':' '}}" href="/admin/jadwalmonitoring">Jadwal Monitoring</a>
-                        <a class="nav-link {{Request::is('hasilmonitoring')?'active':' '}}" href="/admin/hasilmonitoring">Hasil Monitoring</a>
+                        <a class="nav-link {{Request::segment(2) ==='home'? 'active':' '}} " href="/admin/home">Daftar Pegawai<span class="sr-only">(current)</span></a>
+                        <a class="nav-link {{Request::segment(2) ==='dftpelanggan'? 'active':' '}}" href="/admin/dftpelanggan">Daftar Pelanggan</a>
+                        <a class="nav-link {{Request::segment(2) ==='dftbenihpadi'? 'active':' '}}" href="/admin/dftbenihpadi">Stok Padi</a>
+                        <a class="nav-link {{Request::segment(2) ==='dftvarietaspadi'? 'active':' '}}" href="/admin/dftvarietaspadi">Varietas Padi</a>
+                        <a class="nav-link {{Request::segment(2) ==='pesananbenih'? 'active':' '}}" href="/admin/pesananbenih">Pesanan Benih</a>
+                        <!-- <a class="nav-link {{Request::segment(2) ==='jadwalmonitoring'? 'active':' '}}" href="/admin/jadwalmonitoring">Jadwal Monitoring</a> -->
+                        <a class="nav-link {{ Request::segment(2) === 'jadwalmonitoring' ? 'active' : '' }}" href="/admin/jadwalmonitoring">Jadwal Monitoring</a>
+                        <a class="nav-link {{Request::segment(2) ==='hasilmonitoring'? 'active':' '}}" href="/admin/hasilmonitoring">Hasil Monitoring</a>
                     @endif
 
                     @if(Auth::user()->role == 'pimpinan')
-                        <a class="nav-link {{Request::is('jadwalmonitoring')?'active':' '}}" href="/admin/jadwalmonitoring">Jadwal Monitoring</a>
-                        <a class="nav-link {{Request::is('hasilmonitoring')?'active':' '}}" href="/admin/hasilmonitoring">Hasil Monitoring</a>
+                        <a class="nav-link {{Request::segment(2) ==='jadwalmonitoring'? 'active':' '}}" href="/admin/jadwalmonitoring">Jadwal Monitoring</a>
+                        <a class="nav-link {{Request::segment(2) ==='hasilmonitoring'? 'active':' '}}" href="/admin/hasilmonitoring">Hasil Monitoring</a>
                     @endif
                         </div>
                     

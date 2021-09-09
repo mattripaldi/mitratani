@@ -18,6 +18,7 @@ class DftbenihpadiController extends Controller
         $varietas = VarietasPadi::all();
         $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')->get();
         return view('dftbenihpadi', compact('varietas','stok'));
+
     }
 
     public function formbenih()

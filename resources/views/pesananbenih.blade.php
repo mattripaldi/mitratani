@@ -19,26 +19,35 @@
   <thead class="thead-dark text-center">
     <tr>
       <th scope="col">No</th>
-      <th scope="col">Tanggal Pemesanan</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Varietas</th>
+      <!-- <th scope="col">Nama</th> -->
+      <th scope="col">Nomor Induk</th>
       <th scope="col">Lokasi Lahan</th>
-      <th scope="col">Rencana Awal</th>
+      <th scope="col">Tanggal Sebar</th>
+      <th scope="col">Tanggal Tanam</th>
       <th scope="col">Total Benih</th>
       <th scope="col">Total Harga Benih</th>
+      <th scope="col">Total Harga Jasa</th>
+      <th scope="col">Total Biaya</th>
+      <th scope="col">Aksi</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody class="text-center">
+    @foreach ($pesanan as $pesanan)
     <tr>
-      <th scope="row">1</th>
-      <td>10/03/2021</td>
-      <td>Lala</td>
-      <td>Inpari 32</td>
-      <td>Cluring</td>
-      <td>15/04/2021</td>
-      <td>3kg</td>
-      <td>Rp 60.000</td>
+      <th scope="row">{{$loop->iteration}}</th>
+      <td>{{$pesanan->nomor_induk}}</td>
+      <td>{{$pesanan->lahan_pelanggan->nama_lahan}}</td>
+      <td>{{$pesanan->tgl_sebar}}</td>
+      <td>{{$pesanan->tgl_tanam}}</td>
+      <td>{{$pesanan->total_benih}}</td>
+      <td>{{$pesanan->total_harga_benih}}</td>
+      <td>{{$pesanan->total_harga_jasa}}</td>
+      <td>{{$pesanan->total_biaya}}</td>
+      <td><a href="{{ url('admin/editpesanan/'. $pesanan->id) }}" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i></a></td>
+      <td>{{$pesanan->status_pesanan}}</td>
     </tr>
+    @endforeach
   </tbody>
 </table>
   </div>

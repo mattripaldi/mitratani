@@ -37,7 +37,9 @@
       <th scope="row">{{$loop->iteration}}</th>
       <td>{{$varietas->nama_varietas}}</td>
       <td>{{$varietas->deskripsi_varietas}}</td>
-      <td></td>
+      <td>
+        <img src="{{asset('images/'.$varietas->foto_varietas)}}" width="80">
+      </td>
       <td><a href="{{ url('admin/editvarietas/'. $varietas->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>
     </tr>
   @endforeach

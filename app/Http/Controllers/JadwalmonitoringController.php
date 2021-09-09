@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JadwalMonitoring;
 
 class JadwalmonitoringController extends Controller
 {
@@ -13,19 +14,11 @@ class JadwalmonitoringController extends Controller
      */
     public function index()
     {
-    
-        return view('jadwalmonitoring');
+        $jadwal = JadwalMonitoring::all();
+        return view('jadwalmonitoring', compact('jadwal'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  
 
     public function tambah()
     {
@@ -41,6 +34,16 @@ class JadwalmonitoringController extends Controller
     public function store(Request $request)
     {
         //
+        JadwalMonitoring::create([
+            'nomor_induk_pesanan' => "0",
+            'pesanan_id' => 1,
+            'fase_pendahuluan' => $request->fase_pendahuluan,
+            'fase_vegetatif' => $request->fase_vegetatif,
+            'fase_berbunga' => $request->fase_berbunga,
+            'fase_masak' => $request->fase_masak,
+            
+        ]);
+        return redirect('/admin/jadwalmonitoring');
     }
 
     /**

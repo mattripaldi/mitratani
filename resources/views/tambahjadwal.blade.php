@@ -9,7 +9,8 @@
    <strong>DATA JADWAL MONITORING FASE PERTUMBUHAN BENIH PADI</strong> 
   </div>
   <div class="card-body">
-  <form>
+  <form method="POST" action="{{route('jadwalmonitoring.store')}}">
+  @csrf
     <div class="form-group">
         <label for="formGroupExampleInput">Nama</label>
         <select id="inputState" class="form-control" name="fase_pendahuluan">

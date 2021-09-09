@@ -9,7 +9,7 @@
     <strong>EDIT DATA PEGAWAI UD MITRA TANI</strong> 
   </div>
   <div class="card-body">
-  <form method="POST" action="{{ route('editpengguna',['id'=>$detail->id]) }}">
+  <form method="POST" action="{{ route('editpengguna',['id'=>$detail->id]) }}"  enctype="multipart/form-data">
   @csrf
 							<input type="hidden" name="_method" value="PUT">
     <div class="form-group">
@@ -51,6 +51,11 @@
         <option>Admin</option>
         <option>Pimpinan</option>
       </select>
+    </div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput">Foto</label>
+        <input type="file" class="form-control-file" id="foto" name="foto" >
     </div>
 
     <div class="form-group row">

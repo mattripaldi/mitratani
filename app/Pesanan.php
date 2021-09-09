@@ -25,4 +25,8 @@ class Pesanan extends Model
     {
         return $this->belongsTo(StokPadi::class);
     }
+    public function jadwal_monitoring()
+    {
+        return $this->hasOne(JadwalMonitoring::class, 'pesanan_id', 'id');
+    }
 }

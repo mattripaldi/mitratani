@@ -75,6 +75,7 @@ class PesananController extends Controller
         $pesanan->total_biaya = $jumlahBiaya;
         $pesanan->lahan_pelanggan_id = $request->lahan_pelanggan_id;
         $pesanan->stok_padi_id = $stokPadi->id;
+        $pesanan->status_pesanan = "Menunggu Pembayaran";
         $pesanan->save();
 
 
