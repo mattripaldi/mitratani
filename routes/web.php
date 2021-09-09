@@ -48,11 +48,15 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/pelanggan/cari','DftpelangganController@cari');
 //pesanan
     Route::get('/pesananbenih','PesananbenihController@index');
+    Route::GET('/editpesanan/{id}','PesananbenihController@noinduk')->name('editpesanan');
+    Route::POST('/updatepesanan/{id}','PesananbenihController@update')->name('updatepesanan');
 //jadwal
     Route::get('/jadwalmonitoring','JadwalmonitoringController@index');
     Route::get('/tambahjadwal','JadwalmonitoringController@tambah');
+    Route::POST('/tambahjadwal/store','JadwalmonitoringController@store')->name('jadwalmonitoring.store');
 //hasilmonitoring
     Route::get('/hasilmonitoring','HasilmonitoringController@index');
+    Route::get('/detailfasependahuluan','HasilmonitoringController@detailfasependahuluan');
   
 });
 });

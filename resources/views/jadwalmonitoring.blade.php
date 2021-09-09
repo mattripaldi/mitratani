@@ -36,20 +36,20 @@
     </tr>
   </thead>
   <tbody class="text-center">
+    @foreach ($jadwal as $jadwal)
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{$loop->iteration}}</th>
       <td>Lala</td>
       <td>Cluring</td>
-      <td>01/03/2021</td>
-      <td>20/04/2021</td>
-      <td>25/05/2021</td>
-      <td>30/06/2021</td>
+      <td>{{$jadwal->fase_pendahuluan}}</td>
+      <td>{{$jadwal->fase_vegetatif}}</td>
+      <td>{{$jadwal->fase_berbunga}}</td>
+      <td>{{$jadwal->fase_masak}}</td>
       @if(Auth::user()->role == 'admin')
-      <td><button type="button" class="btn btn-warning btn-sm">Edit</button></td>            
+      <td><a class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>            
       @endif
-      
-
     </tr>
+    @endforeach
   </tbody>
 </table>
   </div>

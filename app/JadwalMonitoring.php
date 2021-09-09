@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class JadwalMonitoring extends Model
 {
-    /**
-     * Get the pesanan that owns the JadwalMonitoring
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+    protected $table = 'jadwal_monitorings';
+    protected $fillable =['id', 'nomor_induk_pesanan', 'fase_pendahuluan', 'fase_berbunga', 'fase_vegetatif', 'fase_masak', 'pesanan_id'];
+
+    //
     public function pesanan()
     {
-        return $this->belongsTo(Pesanan::class, 'pesanan_id', 'id');
+        return $this->belongsTo(Pesanan::class);
     }
+    
 }

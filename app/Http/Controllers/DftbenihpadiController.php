@@ -18,6 +18,7 @@ class DftbenihpadiController extends Controller
         $varietas = VarietasPadi::all();
         $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')->get();
         return view('dftbenihpadi', compact('varietas','stok'));
+
     }
 
     public function formbenih()
@@ -29,10 +30,10 @@ class DftbenihpadiController extends Controller
     public function cari(Request $request)
     {
         $cari = $request->input('cari');
-        $stok= StokPadi::where('varietas_padis.nama_varietas', 'like', "%" . $cari ."%")
-        ->join('stok_padis','varietas_padis.id','=', 'stok_padis.id_varietas_padi')
-        ->select('stok_padis.*', 'varietas_padis.nama_varietas')->get();
-        
+        $varietas = VarietasPadi::where('nama_varietas', 'like', "%" . $cari ."%")->get();
+        $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')
+        ->where('id_varietas_padi','=', $varietas[0]->id)->get();
+
         return view('dftbenihpadi', compact('stok'));
     }
     /**

@@ -9,7 +9,7 @@
    <strong>DATA VARIETAS PADI UD MITRA TANI</strong> 
   </div>
   <div class="card-body">
-  <form method="POST" action="{{route('varietas.store')}}">
+  <form method="POST" action="{{route('varietas.store')}}" enctype="multipart/form-data">
   @csrf
     <div class="form-group">
         <label for="formGroupExampleInput">Nama Varietas</label>
@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Foto</label>
-        <input type="file" class="form-control-file" id="foto_varietas">
+        <input type="file" class="form-control-file" name="foto_varietas" id="foto_varietas">
     </div>
     <div class="form-group row">
         <div class="col-sm-10">

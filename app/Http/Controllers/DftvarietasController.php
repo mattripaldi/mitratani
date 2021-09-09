@@ -31,11 +31,22 @@ class DftvarietasController extends Controller
     
     public function store(Request $request)
     {
-        VarietasPadi::create([
-            'nama_varietas' => $request->nama_varietas,
-            'deskripsi_varietas' => $request->deskripsi_varietas,
-            // 'foto' => $request->nama_lengkap,
+        $request->validate ([
+            'nama_varietas' => 'required',
+            'deskripsi_varietas' => 'required',
+            'foto_varietas' => 'mimes:jpeg,png,jpg,gif'
         ]);
+
+        if($request->hasFile('foto_varietas')) {
+            $file = $request->file('foto_varietas');
+            $file->move('images',$file->getClientOriginalName());
+            VarietasPadi::create([
+                'nama_varietas' => $request->nama_varietas,
+                'deskripsi_varietas' => $request->deskripsi_varietas,
+                'foto_varietas' => $file->getClientOriginalName(),
+            ]);
+        }
+        
         return redirect('/admin/dftvarietaspadi');
     }
 
