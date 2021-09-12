@@ -58,25 +58,33 @@ class PesananController extends Controller
         ])->first();
         $lahanPelanggan = LahanPelanggan::find($request->lahan_pelanggan_id);
 
-        $jumlahHargaBenih   = $request->total_benih * $stokPadi->harga_jual_kg;
-        $jumlahHargaJasa    = $lahanPelanggan->luas_lahan * 500;
-        $jumlahBiaya        = $jumlahHargaBenih + $jumlahHargaJasa;
+        if (empty($stokPadi)) {
+            return response()->json([
+                'success'       => 0,
+                'message'       => 'Benih Yang Anda pilih Tidak Tersedia)'
+            ]);
+        } else {
 
-        $stok_padi = StokPadi::find($stokPadi->id);
-        $stok_padi->jumlah_stok = $stokPadi->jumlah_stok - $request->total_benih;
-        $stok_padi->save();
+            $jumlahHargaBenih   = $request->total_benih * $stokPadi->harga_jual_kg;
+            $jumlahHargaJasa    = $lahanPelanggan->luas_lahan * 500;
+            $jumlahBiaya        = $jumlahHargaBenih + $jumlahHargaJasa;
 
-        $pesanan = new Pesanan;
-        $pesanan->tgl_sebar = $request->tgl_sebar;
-        $pesanan->tgl_tanam = $request->tgl_tanam;
-        $pesanan->total_benih = $request->total_benih;
-        $pesanan->total_harga_benih = $jumlahHargaBenih;
-        $pesanan->total_harga_jasa = $jumlahHargaJasa;
-        $pesanan->total_biaya = $jumlahBiaya;
-        $pesanan->lahan_pelanggan_id = $request->lahan_pelanggan_id;
-        $pesanan->stok_padi_id = $stokPadi->id;
-        $pesanan->status_pesanan = "Menunggu Pembayaran";
-        $pesanan->save();
+            $stok_padi = StokPadi::find($stokPadi->id);
+            $stok_padi->jumlah_stok = $stokPadi->jumlah_stok - $request->total_benih;
+            $stok_padi->save();
+
+            $pesanan = new Pesanan;
+            $pesanan->tgl_sebar = $request->tgl_sebar;
+            $pesanan->tgl_tanam = $request->tgl_tanam;
+            $pesanan->total_benih = $request->total_benih;
+            $pesanan->total_harga_benih = $jumlahHargaBenih;
+            $pesanan->total_harga_jasa = $jumlahHargaJasa;
+            $pesanan->total_biaya = $jumlahBiaya;
+            $pesanan->lahan_pelanggan_id = $request->lahan_pelanggan_id;
+            $pesanan->stok_padi_id = $stokPadi->id;
+            $pesanan->status_pesanan = "Menunggu Pembayaran";
+            $pesanan->save();
+        }
 
 
         return response()->json([
