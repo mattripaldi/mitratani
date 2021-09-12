@@ -52,12 +52,17 @@ Route::group(['middleware'=>['auth']],function () {
     Route::POST('/updatepesanan/{id}','PesananbenihController@update')->name('updatepesanan');
 //jadwal
     Route::get('/jadwalmonitoring','JadwalmonitoringController@index');
+    Route::get('/jadwalmonitoring/{id}','JadwalmonitoringController@edit');
+    Route::post('/jadwalmonitoring/{id}','JadwalmonitoringController@update');
     Route::get('/tambahjadwal','JadwalmonitoringController@tambah');
+    Route::post('/getpesanan','JadwalmonitoringController@getpesanan');
     Route::POST('/tambahjadwal/store','JadwalmonitoringController@store')->name('jadwalmonitoring.store');
 //hasilmonitoring
     Route::get('/hasilmonitoring','HasilmonitoringController@index');
-    Route::get('/detailfasependahuluan','HasilmonitoringController@detailfasependahuluan');
-  
+    Route::get('/detailfasependahuluan/{id}','HasilmonitoringController@detailfasependahuluan');
+    Route::get('/detailfasevegetatif/{id}','HasilmonitoringController@detailfasevegetatif');
+    Route::get('/detailfaseberbunga','HasilmonitoringController@detailfaseberbunga');
+    Route::get('/detailfasemasak','HasilmonitoringController@detailfasemasak');
 });
 });
 

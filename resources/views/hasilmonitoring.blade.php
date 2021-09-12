@@ -28,33 +28,19 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
+                        @foreach($hasils as $hasil)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Lala</td>
-                            <td>Cluring</td>
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{$hasil->nama_lahan}}</td>
+                            <td>{{$hasil->alamat}}</td>
                             <td>
-                            <a href="{{ url('admin/detailfasependahuluan') }}" class="btn btn-warning btn-sm">Detail</a>
-                                <!-- @if(Auth::user()->role == 'admin')
-        <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button>
-        @endif -->
+                            <a href="{{ url('admin/detailfasependahuluan/'.$hasil->id) }}" class="btn btn-warning btn-sm">Detail</a>
                             </td>
-                            <td><button type="button" class="btn btn-warning btn-sm"><i
-                                        class='fas fa-file-alt'></i></button>
-                                <!-- @if(Auth::user()->role == 'admin')
-      <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button></td>
-      @endif -->
-                            <td><button type="button" class="btn btn-warning btn-sm"><i
-                                        class='fas fa-file-alt'></i></button>
-                                <!-- @if(Auth::user()->role == 'admin')
-      <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button></td>
-      @endif -->
-                            <td><button type="button" class="btn btn-warning btn-sm"><i
-                                        class='fas fa-file-alt'></i></button>
-                                <!-- @if(Auth::user()->role == 'admin')
-      <button type="button" class="btn btn-success btn-sm"><i class='fas fa-print'></i></button></td>
-      @endif -->
-                                <!-- <td><i class="fas fa-check-square" style='font-size:24px;color:green'></i></td> -->
+                            <td> <a href="{{ url('admin/detailfasevegetatif/'.$hasil->id) }}" class="btn btn-warning btn-sm">Detail</a>
+                            <td> <a href="{{ url('admin/detailfaseberbunga/'.$hasil->id) }}" class="btn btn-warning btn-sm">Detail</a>
+                            <td> <a href="{{ url('admin/detailfasemasak/'.$hasil->id) }}" class="btn btn-warning btn-sm">Detail</a>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

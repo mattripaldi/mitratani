@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\PemeriksaanAwal;
+use App\pemeriksaan_lanjut;
 class HasilmonitoringController extends Controller
 {
     /**
@@ -14,13 +15,40 @@ class HasilmonitoringController extends Controller
     public function index()
     {
     
-        return view('hasilmonitoring');
+        $hasils = PemeriksaanAwal::join('lahan_pelanggans',"lahan_pelanggans.id",
+        'pemeriksaan_awals.lahan_pelanggan_id')
+        ->select('pemeriksaan_awals.*','lahan_pelanggans.nama_lahan','lahan_pelanggans.alamat')
+        ->get();
+        return view('hasilmonitoring',compact('hasils'));
     }
 
-    public function detailfasependahuluan()
+    public function detailfasependahuluan($id)
+    {
+        $hasil = PemeriksaanAwal::where('pemeriksaan_awals.id','=',$id)
+        ->join('lahan_pelanggans',"lahan_pelanggans.id",
+        'pemeriksaan_awals.lahan_pelanggan_id')
+        ->select('pemeriksaan_awals.*','lahan_pelanggans.nama_lahan','lahan_pelanggans.alamat')
+        ->first();
+        return view('detailfasependahuluan',compact('hasil'));
+    }
+
+
+    public function detailfasevegetatif($id)
+    {
+        $hasil = pemeriksaan_lanjut::where('pemeriksaan_awal_id','=',$id)->first();
+        return view('detailfasevegetatif',compact('hasil'));
+    }
+
+    public function detailfaseberbunga()
     {
         // $data = User::where('id',$id)->first();
-        return view('detailfasependahuluan');
+        return view('detailfaseberbunga');
+    }
+
+    public function detailfasemasak()
+    {
+        // $data = User::where('id',$id)->first();
+        return view('detailfasemasak');
     }
    
 

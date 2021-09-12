@@ -64,8 +64,18 @@ class DftvarietasController extends Controller
         $varietas->nama_varietas = $request->nama_varietas;
         $varietas->deskripsi_varietas = $request->deskripsi_varietas;
         $varietas->foto_varietas = $request->foto_varietas;
-
         $varietas->save();
+
+        if($request->hasFile('foto_varietas')) {
+            
+            $file = $request->file('foto_varietas');
+            $file->move('images',$file->getClientOriginalName());
+            VarietasPadi::findorfail($id)->update(["foto_varietas"=>$file->getClientOriginalName()]);
+
+        }
+
+    
+
         
         return redirect('admin/dftvarietaspadi');
     }

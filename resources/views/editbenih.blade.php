@@ -15,7 +15,7 @@
         <label for="formGroupExampleInput">Nama Varietas</label>
         <select class="form-control" name="nama_varietas" >
         @foreach($varietas as $varietas)
-            <option value ="{{ $varietas->id}}" {{$varietas->id == $detail->id_varietas_padi ? 'selected' : ''}}>{{$varietas->nama_varietas}}</option>
+            <option value ="{{$varietas->id}}" {{$varietas->id == $detail->id_varietas_padi ? 'selected' : ''}}>{{$varietas->nama_varietas}}</option>
         @endforeach
         </select>
     </div>

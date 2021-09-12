@@ -16,7 +16,9 @@ class DftbenihpadiController extends Controller
     public function index()
     {
         $varietas = VarietasPadi::all();
-        $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')->get();
+        $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')
+        ->select("varietas_padis.*","stok_padis.*")->get();
+
         return view('dftbenihpadi', compact('varietas','stok'));
 
     }
