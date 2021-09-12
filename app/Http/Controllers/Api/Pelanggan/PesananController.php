@@ -35,6 +35,29 @@ class PesananController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRiwayatMonitoring()
+    {
+        $pesanans = DB::table('pesanans')
+            ->join('lahan_pelanggans', 'lahan_pelanggans.id', '=', 'pesanans.lahan_pelanggan_id')
+            ->join('pelanggans', 'pelanggans.id', '=', 'lahan_pelanggans.pelanggan_id')
+            ->where('pelanggans.id', '=', auth()->user()->id)
+            ->where('status_pesanan', '!=', 'Menunggu Pembayaran')
+            ->where('status_pesanan', '!=', 'Lunas')
+            ->select('pesanans.*', 'lahan_pelanggans.nama_lahan')
+            ->get();
+
+        return response()->json([
+            'success'       => 1,
+            'message'       => 'Pesanan berhasil :)',
+            'pesanans'      => $pesanans
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -52,11 +75,12 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
+
+        $lahanPelanggan = LahanPelanggan::find($request->lahan_pelanggan_id);
         $stokPadi = DB::table('stok_padis')->where([
             ['id_varietas_padi', $request->varietas_padi],
-            ['jumlah_stok', '>', $request->total_benih],
+            ['jumlah_stok', '>', $lahanPelanggan->luas_lahan * 30],
         ])->first();
-        $lahanPelanggan = LahanPelanggan::find($request->lahan_pelanggan_id);
 
         if (empty($stokPadi)) {
             return response()->json([
