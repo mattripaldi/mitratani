@@ -30,13 +30,12 @@ class LahanPelangganController extends Controller
         $data_lahan->alamat         = $request->alamat;
         $data_lahan->luas_lahan     = $request->luas_lahan;
         $data_lahan->sejarah_lahan  = $request->sejarah_lahan;
-        $data_lahan->sejarah_lahan  = 'aktif';
         $data_lahan->pelanggan_id   = auth()->user()->id;;
         $data_lahan->save();
 
         return response()->json([
             'success'       => 1,
-            'message'       => $data_lahan->name . ' berhasil disimpan :)',
+            'message'       => $data_lahan->name.' berhasil disimpan :)',
             'data_lahan'     => $data_lahan
         ]);
     }
@@ -44,13 +43,12 @@ class LahanPelangganController extends Controller
     public function getLahan()
     {
         $dataLahan = DB::table('lahan_pelanggans')
-            ->where('pelanggan_id', '=', auth()->user()->id)
-            ->where('status_lahan', '!=', 'deleted')
+            ->where('pelanggan_id', '=' ,auth()->user()->id)
             ->get();
 
-        // $users = DB::table('users')
-        // ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
-        // ->get();
+            // $users = DB::table('users')
+            // ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+            // ->get();
 
         return response()->json([
             'success' => 1,
@@ -62,14 +60,20 @@ class LahanPelangganController extends Controller
     public function deleteLahan(Request $request)
     {
         $dataLahan = LahanPelanggan::find($request->id);
-        $dataLahan->status_lahan     = 'deleted';
-        $dataLahan->save();
 
-        return response()->json([
-            'success' => 1,
-            'message' => 'data berhasil dihapus',
-            'data_lahan' => $dataLahan
-        ]);
+        if (!empty($dataLahan)) {
+            $dataLahan->delete();
+
+            return response()->json([
+                'success' => 1,
+                'message' => "$dataLahan->nama_lahan berhasil dihapus",
+                'data_lahan' => $dataLahan
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'data tidak ditemukan'
+            ], 404);
+        }
     }
 
     public function updateLahan(Request $request, $id)
