@@ -16,7 +16,7 @@ class VarietasPadiController extends Controller
     public function index()
     {
         $varietasPadi = DB::Table('varietas_padis')->get();
-        
+
         return response()->json([
             'success' => 1,
             'message' => 'Varietas Padi berhasil didapatkan',

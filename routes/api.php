@@ -52,14 +52,16 @@ Route::prefix('petugas')->group(function () {
         Route::get('jadwal-monitoring-fase-vegetatif', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseVegetatif');
         Route::get('jadwal-monitoring-fase-berbunga', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseBerbunga');
         Route::get('jadwal-monitoring-fase-masak', 'Api\Petugas\JadwalMonitoringController@getJadwalFaseMasak');
-        Route::get('jadwal-monitoring-fase', 'Api\Petugas\JadwalMonitoringController@getAllJadwal');
 
         // monitoring
         Route::get('get-monitoring-awal-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringAwalToday');
         Route::get('get-monitoring-vegetatif-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringVegetatifToday');
         Route::get('get-monitoring-berbunga-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringBerbungaToday');
+        Route::get('get-monitoring-masak-today', 'Api\Petugas\JadwalMonitoringController@getMonitoringMasakToday');
 
 
         Route::post('monitoring-awal', 'Api\Petugas\MonitoringPadiController@monitoringAwal');
+        Route::post('monitoring-lanjut', 'Api\Petugas\MonitoringPadiController@monitoringLanjut');
+        Route::get('detail-pesanan/{id}', 'Api\Pelanggan\PesananController@Show');
     });
 });

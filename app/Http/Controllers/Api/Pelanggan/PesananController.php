@@ -95,8 +95,9 @@ class PesananController extends Controller
     public function show($id)
     {
         $pesanan = Pesanan::Find($id);
-        $lahan = $pesanan->lahan_pelanggan;
+        $lahan = $pesanan->lahan_pelanggan->pelanggan;
         $stokPadi = $pesanan->stok_padi->varietas_padi;
+        $pemeriksaan_awal = $pesanan->pemeriksaan_awal;
 
 
         return response()->json([
