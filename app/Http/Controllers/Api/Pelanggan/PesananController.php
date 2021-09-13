@@ -34,6 +34,25 @@ class PesananController extends Controller
         ]);
     }
 
+    public function getRiwayatMonitoring()
+    {
+        $pesanans = DB::table('pesanans')
+            ->join('lahan_pelanggans', 'lahan_pelanggans.id', '=', 'pesanans.lahan_pelanggan_id')
+            ->join('pelanggans', 'pelanggans.id', '=', 'lahan_pelanggans.pelanggan_id')
+            ->where('pelanggans.id', '=', auth()->user()->id)
+            ->where('status_pesanan', '!=', 'Menunggu Pembayaran')
+            ->where('status_pesanan', '!=', 'Lunas')
+            ->select('pesanans.*', 'lahan_pelanggans.nama_lahan')
+            ->get();
+
+        return response()->json([
+            'success'       => 1,
+            'message'       => 'Pesanan berhasil :)',
+            'pesanans'      => $pesanans
+        ]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,46 +71,54 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        $stokPadi = DB::table('stok_padis')->where([
-            ['id_varietas_padi', $request->varietas_padi],
-            ['jumlah_stok', '>', $request->total_benih],
-        ])->first();
         $lahanPelanggan = LahanPelanggan::find($request->lahan_pelanggan_id);
 
-        if (empty($stokPadi)) {
+        if (empty($lahanPelanggan)) {
             return response()->json([
                 'success'       => 0,
-                'message'       => 'Benih Yang Anda pilih Tidak Tersedia)'
+                'message'       => 'Lengkapi Informasi Lahan terlebih dahulu)'
             ]);
         } else {
+            $stokPadi = DB::table('stok_padis')->where([
+                ['id_varietas_padi', $request->varietas_padi],
+                ['jumlah_stok', '>', $lahanPelanggan->luas_lahan * 30],
+            ])->first();
 
-            $jumlahHargaBenih   = $request->total_benih * $stokPadi->harga_jual_kg;
-            $jumlahHargaJasa    = $lahanPelanggan->luas_lahan * 500;
-            $jumlahBiaya        = $jumlahHargaBenih + $jumlahHargaJasa;
+            if (empty($stokPadi)) {
+                return response()->json([
+                    'success'       => 0,
+                    'message'       => 'Benih Yang Anda pilih Tidak Tersedia)'
+                ]);
+            } else {
 
-            $stok_padi = StokPadi::find($stokPadi->id);
-            $stok_padi->jumlah_stok = $stokPadi->jumlah_stok - $request->total_benih;
-            $stok_padi->save();
+                $jumlahHargaBenih   = $lahanPelanggan->luas_lahan * 30 * $stokPadi->harga_jual_kg;
+                $jumlahHargaJasa    = $lahanPelanggan->luas_lahan * 700000;
+                $jumlahBiaya        = $jumlahHargaBenih + $jumlahHargaJasa;
 
-            $pesanan = new Pesanan;
-            $pesanan->tgl_sebar = $request->tgl_sebar;
-            $pesanan->tgl_tanam = $request->tgl_tanam;
-            $pesanan->total_benih = $request->total_benih;
-            $pesanan->total_harga_benih = $jumlahHargaBenih;
-            $pesanan->total_harga_jasa = $jumlahHargaJasa;
-            $pesanan->total_biaya = $jumlahBiaya;
-            $pesanan->lahan_pelanggan_id = $request->lahan_pelanggan_id;
-            $pesanan->stok_padi_id = $stokPadi->id;
-            $pesanan->status_pesanan = "Menunggu Pembayaran";
-            $pesanan->save();
+                $stok_padi = StokPadi::find($stokPadi->id);
+                $stok_padi->jumlah_stok = $stokPadi->jumlah_stok - $request->total_benih;
+                $stok_padi->save();
+
+                $pesanan = new Pesanan;
+                $pesanan->tgl_sebar = $request->tgl_sebar;
+                $pesanan->tgl_tanam = $request->tgl_tanam;
+                $pesanan->total_benih = $lahanPelanggan->luas_lahan * 30;
+                $pesanan->total_harga_benih = $jumlahHargaBenih;
+                $pesanan->total_harga_jasa = $jumlahHargaJasa;
+                $pesanan->total_biaya = $jumlahBiaya;
+                $pesanan->lahan_pelanggan_id = $request->lahan_pelanggan_id;
+                $pesanan->stok_padi_id = $stokPadi->id;
+                $pesanan->status_pesanan = "Menunggu Pembayaran";
+                $pesanan->save();
+            }
+
+
+            return response()->json([
+                'success'       => 1,
+                'message'       => 'Pesanan berhasil :)',
+                'pesanan'     => $pesanan
+            ]);
         }
-
-
-        return response()->json([
-            'success'       => 1,
-            'message'       => 'Pesanan berhasil :)',
-            'pesanan'     => $pesanan
-        ]);
     }
 
     /**

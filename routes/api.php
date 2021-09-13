@@ -42,6 +42,10 @@ Route::group(['prefix' => 'pelanggan'], function () {
         Route::post('pesan-benih', 'Api\Pelanggan\PesananController@store');
         Route::get('detail-pesanan/{id}', 'Api\Pelanggan\PesananController@Show');
         Route::get('pesanans', 'Api\Pelanggan\PesananController@index');
+
+        // Routes Pesanan
+        Route::get('monitoring', 'Api\Pelanggan\PesananController@getRiwayatMonitoring');
+        Route::get('pemeriksaan-awal/{id}', 'Api\Pelanggan\RiwayatMonitoringController@getPemeriksaanAwal');
     });
 });
 
