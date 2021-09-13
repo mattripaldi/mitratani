@@ -39,14 +39,14 @@
     @foreach ($jadwal as $jadwal)
     <tr>
       <th scope="row">{{$loop->iteration}}</th>
-      <td>Lala</td>
-      <td>Cluring</td>
+      <td>{{$jadwal->nama_lahan}}</td>
+      <td>{{$jadwal->alamat}}</td>
       <td>{{$jadwal->fase_pendahuluan}}</td>
       <td>{{$jadwal->fase_vegetatif}}</td>
       <td>{{$jadwal->fase_berbunga}}</td>
       <td>{{$jadwal->fase_masak}}</td>
       @if(Auth::user()->role == 'admin')
-      <td><a class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>            
+      <td><a href="{{url('admin/jadwalmonitoring/'.$jadwal->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>            
       @endif
     </tr>
     @endforeach

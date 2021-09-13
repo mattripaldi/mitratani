@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\pendahuluanExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,17 @@ Route::get('/', function () {
 });
 Auth::routes(['register'=> false]);
 
+Route::get('testexcel', function () {
+    return Excel::download(new pendahuluanExport,'pendahuluan.xlsx');
+});
+
 
 Route::group(['middleware'=>['auth']],function () {
     Route::prefix('admin')->group(function(){
 //pengguna
+    	// Cetak 
+Route::get('cetak/pendahuluan/{id}','cetakExcelController@pendahuluan');
+
     Route::get('/home','DftpenggunaController@index');
     Route::get('/tambahpengguna','DftpenggunaController@formpengguna');
     Route::get('/detailpengguna/{id}','DftpenggunaController@detailpengguna');
@@ -52,12 +61,17 @@ Route::group(['middleware'=>['auth']],function () {
     Route::POST('/updatepesanan/{id}','PesananbenihController@update')->name('updatepesanan');
 //jadwal
     Route::get('/jadwalmonitoring','JadwalmonitoringController@index');
+    Route::get('/jadwalmonitoring/{id}','JadwalmonitoringController@edit');
+    Route::post('/jadwalmonitoring/{id}','JadwalmonitoringController@update');
     Route::get('/tambahjadwal','JadwalmonitoringController@tambah');
+    Route::post('/getpesanan','JadwalmonitoringController@getpesanan');
     Route::POST('/tambahjadwal/store','JadwalmonitoringController@store')->name('jadwalmonitoring.store');
 //hasilmonitoring
     Route::get('/hasilmonitoring','HasilmonitoringController@index');
-    Route::get('/detailfasependahuluan','HasilmonitoringController@detailfasependahuluan');
-  
+    Route::get('/detailfasependahuluan/{id}','HasilmonitoringController@detailfasependahuluan');
+    Route::get('/detailfasevegetatif/{id}','HasilmonitoringController@detailfasevegetatif');
+    Route::get('/detailfaseberbunga','HasilmonitoringController@detailfaseberbunga');
+    Route::get('/detailfasemasak','HasilmonitoringController@detailfasemasak');
 });
 });
 

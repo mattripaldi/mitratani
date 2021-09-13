@@ -14,33 +14,31 @@
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">Hasil Monitoring</th>
-                                    <th scope="col">Status Monitoring</th>
-                                    <th scope="col">Foto Monitoring</th>
+                                    <th scope="col">Nama Pelanggan</th>
+                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Letak Areal</th>
+                                    <th scope="col">Luas Areal</th>
+                                    <th scope="col">Isolasi</th>
+                                    <th scope="col">Sejarah Lahan</th>
+                                    <th scope="col">Asal Jumlah Benih</th>
+                                    <th scope="col">Catatan</th>
+                                    <th scope="col">Kesimpulan</th>
+                                    <th scope="col">Hasil</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>{{$hasil->pesanan->lahan_pelanggan->nama_lahan}}</td>
+                                    <td>{{$hasil->pesanan->lahan_pelanggan->alamat}}</td>
+                                    <td>{{$hasil->letak_areal}}</td>
+                                    <td>{{$hasil->luas_areal}}</td>
+                                    <td>{{$hasil->isolasi}}</td>
+                                    <td>{{$hasil->sejarah_lapang}}</td>
+                                    <td>{{$hasil->asal_jumlah_benih}}</td>
+                                    <td>{{$hasil->catatan}}</td>
+                                    <td>{{$hasil->kesimpulan}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-md">Selesai</a>
-                                    </td>
-                                    <td>
-                                        <img src="{{ asset('images/lala.jpeg') }}" width="120" alt="">
-                                    </td>
-                                </tr>
-                               
-                                <tr>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger btn-md">Belum Dicek</a>
-                                    </td>
-                                    <td>
-                                        <img src="{{ asset('images/lala.jpeg') }}" width="120" alt="">
+                                    <a href="{{url('admin/cetak/pendahuluan/'.$hasil->id)}}" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

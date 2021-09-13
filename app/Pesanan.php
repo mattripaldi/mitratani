@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pesanan extends Model
 {
-    /**
-     * Get the user associated with the Pesanan
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
+    
     public function lahan_pelanggan()
     {
         return $this->belongsTo(LahanPelanggan::class);
