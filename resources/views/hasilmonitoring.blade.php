@@ -31,8 +31,8 @@
                         @foreach($hasils as $hasil)
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
-                            <td>{{$hasil->nama_lahan}}</td>
-                            <td>{{$hasil->alamat}}</td>
+                            <td>{{$hasil->pesanan->lahan_pelanggan->nama_lahan}}</td>
+                            <td>{{$hasil->pesanan->lahan_pelanggan->alamat}}</td>
                             <td>
                             <a href="{{ url('admin/detailfasependahuluan/'.$hasil->id) }}" class="btn btn-warning btn-sm">Detail</a>
                             </td>

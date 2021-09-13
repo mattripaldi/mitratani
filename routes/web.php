@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\pendahuluanExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,17 @@ Route::get('/', function () {
 });
 Auth::routes(['register'=> false]);
 
+Route::get('testexcel', function () {
+    return Excel::download(new pendahuluanExport,'pendahuluan.xlsx');
+});
+
 
 Route::group(['middleware'=>['auth']],function () {
     Route::prefix('admin')->group(function(){
 //pengguna
+    	// Cetak 
+Route::get('cetak/pendahuluan/{id}','cetakExcelController@pendahuluan');
+
     Route::get('/home','DftpenggunaController@index');
     Route::get('/tambahpengguna','DftpenggunaController@formpengguna');
     Route::get('/detailpengguna/{id}','DftpenggunaController@detailpengguna');

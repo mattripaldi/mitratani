@@ -15,31 +15,15 @@ class HasilmonitoringController extends Controller
     public function index()
     {
     
-        $hasils = PemeriksaanAwal::join('lahan_pelanggans',"lahan_pelanggans.id",
-        'pemeriksaan_awals.lahan_pelanggan_id')
-        ->select('pemeriksaan_awals.*','lahan_pelanggans.nama_lahan','lahan_pelanggans.alamat')
+        $hasils = PemeriksaanAwal::join('pesanans',"pesanans.id",
+        'pemeriksaan_awals.pesanan_id')
+        ->with('pesanan.lahan_pelanggan')
+        ->select('pemeriksaan_awals.*')
         ->get();
         return view('hasilmonitoring',compact('hasils'));
     }
 
     public function detailfasependahuluan($id)
-    {
-        $hasil = PemeriksaanAwal::where('pemeriksaan_awals.id','=',$id)
-        ->join('lahan_pelanggans',"lahan_pelanggans.id",
-        'pemeriksaan_awals.lahan_pelanggan_id')
-        ->select('pemeriksaan_awals.*','lahan_pelanggans.nama_lahan','lahan_pelanggans.alamat')
-        ->first();
-        return view('detailfasependahuluan',compact('hasil'));
-    }
-
-
-    public function detailfasevegetatif($id)
-    {
-        $hasil = pemeriksaan_lanjut::where('pemeriksaan_awal_id','=',$id)->first();
-        return view('detailfasevegetatif',compact('hasil'));
-    }
-
-    public function detailfaseberbunga()
     {
         // $data = User::where('id',$id)->first();
         return view('detailfaseberbunga');

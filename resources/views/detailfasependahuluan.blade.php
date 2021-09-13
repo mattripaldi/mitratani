@@ -28,8 +28,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{$hasil->nama_lahan}}</td>
-                                    <td>{{$hasil->alamat}}</td>
+                                    <td>{{$hasil->pesanan->lahan_pelanggan->nama_lahan}}</td>
+                                    <td>{{$hasil->pesanan->lahan_pelanggan->alamat}}</td>
                                     <td>{{$hasil->letak_areal}}</td>
                                     <td>{{$hasil->luas_areal}}</td>
                                     <td>{{$hasil->isolasi}}</td>
@@ -38,7 +38,7 @@
                                     <td>{{$hasil->catatan}}</td>
                                     <td>{{$hasil->kesimpulan}}</td>
                                     <td>
-                                    <a href="#" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
+                                        <a href="#" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
