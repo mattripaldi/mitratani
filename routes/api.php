@@ -30,8 +30,7 @@ Route::group(['prefix' => 'pelanggan'], function () {
 
         // Route lahan pelanggan
         Route::post('tambah-lahan', 'Api\Pelanggan\LahanPelangganController@tambahLahan');
-        Route::get('data-lahan', 'Api\
-        Pelanggan\LahanPelangganController@getLahan');
+        Route::get('data-lahan', 'Api\Pelanggan\LahanPelangganController@getLahan');
         Route::post('delete-lahan', 'Api\Pelanggan\LahanpelangganController@deleteLahan');
         Route::put('update-lahan/{id}', 'Api\Pelanggan\LahanPelangganController@updateLahan');
 

@@ -94,7 +94,7 @@ class UserController extends Controller
             'nik'               => $request->get('nik'),
             'alamat'            => $request->get('alamat'),
             'telepon'           => $request->get('telepon'),
-            'jenis_kelamin'     => $request->get('jenis_kelamin'),
+            'jenis_kelamin'     => 'laki-laki',
             'password'          => bcrypt($request->get('password'))
         ]);
 
