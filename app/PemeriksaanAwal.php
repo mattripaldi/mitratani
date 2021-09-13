@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PemeriksaanAwal extends Model
 {
-    public function pemeriksaanlanjut()
+    public function pemeriksaan_lanjut()
     {
-        return $this->belongsTo(pemeriksaan_lanjut::class);
+        return $this->hasMany(pemeriksaan_lanjut::class);
     }
 
     public function pesanan()

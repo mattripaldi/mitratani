@@ -31,4 +31,14 @@ class Pesanan extends Model
     {
         return $this->hasOne(JadwalMonitoring::class, 'pesanan_id', 'id');
     }
+
+    /**
+     * Get the jadwal_monitoring associated with the Pesanan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function pemeriksaan_awal()
+    {
+        return $this->hasOne(PemeriksaanAwal::class, 'pesanan_id', 'id');
+    }
 }
