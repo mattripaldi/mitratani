@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\PushNotifController;
+
 use Illuminate\Http\Request;
 use App\Pesanan;
 
@@ -89,6 +91,13 @@ class PesananbenihController extends Controller
         $stok->nomor_induk = $request->nomor_induk;
         $stok->status_pesanan = $request->status_pesanan;
         $stok->save();
+
+        if($stok->status_pesanan == "Lunas"){
+            app(PushNotifController::class)->pushNotif(
+                "Pembayaran Terkonfirmas",
+                "Pesanan " . $stok->lahan_pelanggan->nama_lahan . " sudah lunas",
+                $stok->lahan_pelanggan->pelanggan->fcm);
+        }
         
         return redirect('admin/pesananbenih');     
     }

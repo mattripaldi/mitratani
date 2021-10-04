@@ -13,7 +13,7 @@
   @csrf
     <div class="form-group">
         <label for="formGroupExampleInput">Nama Varietas</label>
-        <input type="text" class="form-control" id="nama_varietas" name="nama_varietas" >
+        <input type="text" class="form-control" id="nama_varietas" name="nama_varietas" value="{{ old('nama_varietas') }}" required >
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Deskripsi Varietas</label>

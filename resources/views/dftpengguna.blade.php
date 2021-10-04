@@ -14,9 +14,9 @@
         <a href="/admin/tambahpengguna" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> Tambah Pegawai</a>
   </div>
   <div class="row">
-  <div class="col mb-2">
+  <!-- <div class="col mb-2">
         <a href="/tambahpengguna" class="btn btn-success btn-sm"> <i class="fas fa-print"></i> Cetak</a>
-  </div>
+  </div> -->
   <div class="mb-3 col-md-auto mr-3">
   <form action="/admin/home/cari" method="get">
 		<input type="text" name="cari" placeholder="Cari">

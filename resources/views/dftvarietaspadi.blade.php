@@ -38,7 +38,7 @@
       <td>{{$varietas->nama_varietas}}</td>
       <td>{{$varietas->deskripsi_varietas}}</td>
       <td>
-        <img src="{{asset('images/'.$varietas->foto_varietas)}}" width="300">
+        <img src="{{asset('images/'.$varietas->foto_varietas)}}" width="150">
       </td>
       <td><a href="{{ url('admin/editvarietas/'. $varietas->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>
     </tr>

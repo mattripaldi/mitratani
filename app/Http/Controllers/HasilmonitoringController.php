@@ -25,14 +25,48 @@ class HasilmonitoringController extends Controller
 
     public function detailfasependahuluan($id)
     {
-        // $data = User::where('id',$id)->first();
-        return view('detailfaseberbunga');
+        $hasil = PemeriksaanAwal::where('pemeriksaan_awals.id','=',$id)
+        ->join('pesanans',"pesanans.id",
+        'pemeriksaan_awals.pesanan_id')
+        ->select('pemeriksaan_awals.*')
+        ->with('pesanan.lahan_pelanggan')
+        ->first();
+        return view('detailfasependahuluan',compact('hasil'));
     }
 
-    public function detailfasemasak()
+
+    public function detailfasevegetatif($id)
     {
-        // $data = User::where('id',$id)->first();
-        return view('detailfasemasak');
+        $hasil = pemeriksaan_lanjut::where('pemeriksaan_awal_id','=',$id)
+        ->where('jenis_pemeriksaan','=','Vegetatif')
+        ->with('pemeriksaanawal.pesanan.lahan_pelanggan')->first();
+
+        return view('detailfasevegetatif',compact('hasil'));
+    }
+
+    public function detailfaseberbunga($id)
+    {
+        $hasil = pemeriksaan_lanjut::where('pemeriksaan_awal_id','=',$id)
+        ->where('jenis_pemeriksaan','=','Berbunga')
+        ->with('pemeriksaanawal.pesanan.lahan_pelanggan')->first();
+
+        return view('detailfaseberbunga',compact('hasil'));
+    }
+
+    public function detailfasemasak($id)
+    {
+        $hasil = pemeriksaan_lanjut::where('pemeriksaan_awal_id','=',$id)
+        ->where('jenis_pemeriksaan','=','Masak')
+        ->with('pemeriksaanawal.pesanan.lahan_pelanggan')->first();
+        return view('detailfasemasak',compact('hasil'));
+    }
+
+    public function updatestatus($id, Request $request)
+    {
+        pemeriksaan_lanjut::where('id','=',$id)
+        ->update(["status_pemeriksaan"=>$request->status_pemeriksaan]);
+
+        return redirect()->back();
     }
    
 
