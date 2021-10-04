@@ -23,7 +23,9 @@
                                     <th scope="col">Asal Jumlah Benih</th>
                                     <th scope="col">Catatan</th>
                                     <th scope="col">Kesimpulan</th>
+                                    @if(Auth::user()->role == "admin")
                                     <th scope="col">Hasil</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,9 +39,11 @@
                                     <td>{{$hasil->asal_jumlah_benih}}</td>
                                     <td>{{$hasil->catatan}}</td>
                                     <td>{{$hasil->kesimpulan}}</td>
+                                    @if(Auth::user()->role == "admin")
                                     <td>
                                     <a href="{{url('admin/cetak/pendahuluan/'.$hasil->id)}}" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
                                     </td>
+                                    @endif
                                 </tr>
                             </tbody>
                         </table>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Pelanggan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PushNotifController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\VarietasPadi;
@@ -96,7 +98,7 @@ class PesananController extends Controller
                 $jumlahBiaya        = $jumlahHargaBenih + $jumlahHargaJasa;
 
                 $stok_padi = StokPadi::find($stokPadi->id);
-                $stok_padi->jumlah_stok = $stokPadi->jumlah_stok - $request->total_benih;
+                $stok_padi->jumlah_stok = $stokPadi->jumlah_stok - ($lahanPelanggan->luas_lahan * 30);
                 $stok_padi->save();
 
                 $pesanan = new Pesanan;
@@ -110,6 +112,11 @@ class PesananController extends Controller
                 $pesanan->stok_padi_id = $stokPadi->id;
                 $pesanan->status_pesanan = "Menunggu Pembayaran";
                 $pesanan->save();
+
+                app(PushNotifController::class)
+                    ->pushNotif("Pesanan berhasil",
+                        "Pesanan Benih untuk ".$pesanan->lahan_pelanggan->nama_lahan,
+                        $pesanan->lahan_pelanggan->pelanggan->fcm);
             }
 
 

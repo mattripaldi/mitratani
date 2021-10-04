@@ -52,6 +52,10 @@ class UserController extends Controller
 
         $pelanggan = Pelanggan::where('name', $request->name)->first();
         if ($pelanggan) {
+
+            $pelanggan->update([
+                'fcm' => $request->fcm
+            ]);
             if (password_verify($request->password, $pelanggan->password)) {
 
                 $tokenResult    = $pelanggan->createToken('AccessToken');

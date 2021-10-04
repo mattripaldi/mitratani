@@ -20,17 +20,21 @@ Route::get('/', function () {
 });
 Auth::routes(['register'=> false]);
 
-Route::get('testexcel', function () {
-    return Excel::download(new pendahuluanExport,'pendahuluan.xlsx');
-});
 
 
 Route::group(['middleware'=>['auth']],function () {
     Route::prefix('admin')->group(function(){
-//pengguna
-    	// Cetak 
-Route::get('cetak/pendahuluan/{id}','cetakExcelController@pendahuluan');
 
+// Cetak 
+Route::get('cetak/pendahuluan/{id}','cetakExcelController@pendahuluan');
+Route::get('cetak/vegetatif/{id}','cetakExcelController@vegetatif');
+Route::get('cetak/masak/{id}','cetakExcelController@masak');
+Route::get('cetak/berbunga/{id}','cetakExcelController@berbunga');
+
+Route::post('updatestatusfase/{id}','HasilMonitoringController@updatestatus');
+
+
+//pengguna
     Route::get('/home','DftpenggunaController@index');
     Route::get('/tambahpengguna','DftpenggunaController@formpengguna');
     Route::get('/detailpengguna/{id}','DftpenggunaController@detailpengguna');
@@ -70,8 +74,8 @@ Route::get('cetak/pendahuluan/{id}','cetakExcelController@pendahuluan');
     Route::get('/hasilmonitoring','HasilmonitoringController@index');
     Route::get('/detailfasependahuluan/{id}','HasilmonitoringController@detailfasependahuluan');
     Route::get('/detailfasevegetatif/{id}','HasilmonitoringController@detailfasevegetatif');
-    Route::get('/detailfaseberbunga','HasilmonitoringController@detailfaseberbunga');
-    Route::get('/detailfasemasak','HasilmonitoringController@detailfasemasak');
+    Route::get('/detailfaseberbunga/{id}','HasilmonitoringController@detailfaseberbunga');
+    Route::get('/detailfasemasak/{id}','HasilmonitoringController@detailfasemasak');
 });
 });
 

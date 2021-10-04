@@ -56,6 +56,17 @@ class DftbenihpadiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate ([
+            'supplier_benih' => 'required',
+            'kelas_benih' =>'required',
+            'label' => 'required',
+            'jumlah_stok' =>'required',
+            'tanggal_beli_benih' => 'required',
+            'tanggal_kadaluarsa' => 'required',
+            'harga_beli_sak' => 'required',
+            'harga_jual_sak' =>'required',
+            'harga_jual_kg' => 'required',
+        ]);
         //
         StokPadi::create([
             'id_varietas_padi' => $request->nama_varietas,

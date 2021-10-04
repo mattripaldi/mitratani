@@ -21,19 +21,19 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Supplier</label>
-        <input type="text" class="form-control" id="supplier_benih" name="supplier_benih">
+        <input type="text" class="form-control" id="supplier_benih" name="supplier_benih" value="{{ old('supplier_benih') }}" required>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Kelas Benih</label>
-        <input type="text" class="form-control" id="tkelas_benih" name="kelas_benih">
+        <input type="text" class="form-control" id="tkelas_benih" name="kelas_benih" value="{{ old('kelas_benih') }}" required>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Label Benih</label>
-        <input type="text" class="form-control" id="label" name="label" >
+        <input type="text" class="form-control" id="label" name="label" value="{{ old('label') }}" required>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Stok</label>
-        <input type="text" class="form-control" id="jumlah_stok" name="jumlah_stok">
+        <input type="text" class="form-control" id="jumlah_stok" name="jumlah_stok" value="{{ old('jumlah_stok') }}" required>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Tanggal Beli</label>

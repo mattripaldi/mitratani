@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Tanggal Fase Pendahuluan</label>
-        <input type="date" class="form-control" id="date" name="fase_pendahuluan">
+        <input type="date" class="form-control" id="date" name="fase_pendahuluan" value="{{ old('fase_pendahuluan') }}" required >
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Tanggal Fase Vegetatif</label>
