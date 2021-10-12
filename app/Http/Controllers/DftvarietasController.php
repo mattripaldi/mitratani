@@ -12,12 +12,12 @@ class DftvarietasController extends Controller
     {
         $varietas = VarietasPadi::orderBy('id', 'Desc')->get();
         return view('dftvarietaspadi', compact('varietas'));
-        
+
     }
 
     public function formvarietas()
     {
-    
+
         return view('tambahvarietas');
     }
 
@@ -25,28 +25,27 @@ class DftvarietasController extends Controller
     {
         $cari = $request->input('cari');
         $varietas = VarietasPadi::where('nama_varietas', 'like', "%" . $cari ."%")->get();
-        
+
         return view('dftvarietaspadi', compact('varietas'));
     }
-    
+
     public function store(Request $request)
     {
         $request->validate ([
             'nama_varietas' => 'required',
             'deskripsi_varietas' => 'required',
-            'foto_varietas' => 'mimes:jpeg,png,jpg,gif'
+            'foto_varietas' => 'required|mimes:jpeg,png,jpg,gif'
         ]);
 
-        if($request->hasFile('foto_varietas')) {
-            $file = $request->file('foto_varietas');
-            $file->move('images',$file->getClientOriginalName());
-            VarietasPadi::create([
-                'nama_varietas' => $request->nama_varietas,
-                'deskripsi_varietas' => $request->deskripsi_varietas,
-                'foto_varietas' => $file->getClientOriginalName(),
-            ]);
-        }
-        
+        $file = $request->file('foto_varietas');
+        $file->move('images',$file->getClientOriginalName());
+
+        VarietasPadi::create([
+            'nama_varietas' => $request->nama_varietas,
+            'deskripsi_varietas' => $request->deskripsi_varietas,
+            'foto_varietas' => $file->getClientOriginalName(),
+        ]);
+
         return redirect('/admin/dftvarietaspadi');
     }
 
@@ -59,24 +58,24 @@ class DftvarietasController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate ([
+            'nama_varietas' => 'required',
+            'deskripsi_varietas' => 'required',
+            'foto_varietas' => 'mimes:jpeg,png,jpg,gif'
+        ]);
+
         $varietas = VarietasPadi::findorfail($id);
 
         $varietas->nama_varietas = $request->nama_varietas;
         $varietas->deskripsi_varietas = $request->deskripsi_varietas;
-        $varietas->foto_varietas = $request->foto_varietas;
         $varietas->save();
 
         if($request->hasFile('foto_varietas')) {
-            
             $file = $request->file('foto_varietas');
             $file->move('images',$file->getClientOriginalName());
             VarietasPadi::findorfail($id)->update(["foto_varietas"=>$file->getClientOriginalName()]);
-
         }
 
-    
-
-        
         return redirect('admin/dftvarietaspadi');
     }
 }

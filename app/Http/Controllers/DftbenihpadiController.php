@@ -16,8 +16,10 @@ class DftbenihpadiController extends Controller
     public function index()
     {
         $varietas = VarietasPadi::all();
+
         $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')
-        ->select("varietas_padis.*","stok_padis.*")->get();
+                        ->select("varietas_padis.*","stok_padis.*")
+                        ->get();
 
         return view('dftbenihpadi', compact('varietas','stok'));
 
@@ -26,15 +28,18 @@ class DftbenihpadiController extends Controller
     public function formbenih()
     {
         $varietas=VarietasPadi::all();
+
         return view('tambahbenih',compact('varietas'));
     }
 
     public function cari(Request $request)
     {
         $cari = $request->input('cari');
-        $varietas = VarietasPadi::where('nama_varietas', 'like', "%" . $cari ."%")->get();
+        $varietas = VarietasPadi::where('nama_varietas', 'like', "%" . $cari ."%")->first();
+
         $stok = StokPadi::join('varietas_padis','varietas_padis.id','=','stok_padis.id_varietas_padi')
-        ->where('id_varietas_padi','=', $varietas[0]->id)->get();
+                            ->where('id_varietas_padi','=', optional($varietas)->id)
+                            ->get();
 
         return view('dftbenihpadi', compact('stok'));
     }
@@ -56,7 +61,7 @@ class DftbenihpadiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'supplier_benih' => 'required',
             'kelas_benih' =>'required',
             'label' => 'required',
@@ -67,7 +72,7 @@ class DftbenihpadiController extends Controller
             'harga_jual_sak' =>'required',
             'harga_jual_kg' => 'required',
         ]);
-        //
+
         StokPadi::create([
             'id_varietas_padi' => $request->nama_varietas,
             'supplier_benih' => $request->supplier_benih,
@@ -79,9 +84,9 @@ class DftbenihpadiController extends Controller
             'harga_beli_sak' => $request->harga_beli_sak,
             'harga_jual_sak' => $request->harga_jual_sak,
             'harga_jual_kg' => $request->harga_jual_kg,
-        //perkiraan laba grg 
-            
+            // 'perkiraan_laba' => $request->perkiraan_laba,
         ]);
+
         return redirect('/admin/dftbenihpadi');
     }
 
@@ -131,10 +136,10 @@ class DftbenihpadiController extends Controller
         $stok->harga_beli_sak = $request->harga_beli_sak;
         $stok->harga_jual_sak = $request->harga_jual_sak;
         $stok->harga_jual_kg = $request->harga_jual_kg;
-        $stok->perkiraan_laba = $request->perkiraan_laba;
+        // $stok->perkiraan_laba = $request->perkiraan_laba;
 
         $stok->save();
-        
+
         return redirect('admin/dftbenihpadi');
     }
 

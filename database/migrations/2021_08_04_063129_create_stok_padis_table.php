@@ -21,7 +21,7 @@ class CreateStokPadisTable extends Migration
             $table->decimal('harga_beli_sak', 10,0);
             $table->decimal('harga_jual_sak', 10,0);
             $table->decimal('harga_jual_kg', 10,0);
-            $table->decimal('perkiraan_laba', 10,0);
+            $table->decimal('perkiraan_laba', 10,0)->nullable();
             $table->float('jumlah_stok', 5,2);
             $table->date('tanggal_kadaluarsa');
             $table->String('label');

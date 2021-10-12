@@ -13,15 +13,15 @@
                     @csrf
                     <div class="form-group">
                         <label for="formGroupExampleInput">Nama Varietas</label>
-                        <input type="text" class="form-control" id="nama_varietas" name="nama_varietas" value="{{ $detail->nama_varietas }}" required />
+                        <input type="text" class="form-control @error('nama_varietas') is-invalid @enderror" id="nama_varietas" name="nama_varietas" value="{{ $detail->nama_varietas }}" required />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Deskripsi Varietas</label>
-                        <input type="text" class="form-control" id="deskripsi_varietas" name="deskripsi_varietas" value="{{ $detail->deskripsi_varietas }}" required />
+                        <input type="text" class="form-control @error('deskripsi_varietas') is-invalid @enderror" id="deskripsi_varietas" name="deskripsi_varietas" value="{{ $detail->deskripsi_varietas }}" required />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Foto</label>
-                        <input type="file" class="form-control-file" name="foto_varietas" id="foto_varietas" />
+                        <input type="file" class="form-control @error('foto_varietas') is-invalid @enderror" name="foto_varietas" id="foto_varietas" />
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-10">

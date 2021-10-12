@@ -11,9 +11,9 @@
             </div>
 
             <div class="col-md-auto mt-3 ml-2">
-                <form action="/pegawai/cari" method="GET">
-                <input type="text" name="cari" placeholder="Cari">
-                <input type="submit" value="Cari">
+                <form action="{{ Request::fullUrl() }}" method="GET">
+                    <input type="text" name="cari" placeholder="Cari">
+                    <input type="submit" value="Cari">
                 </form>
             </div>
 

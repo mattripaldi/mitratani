@@ -15,7 +15,7 @@
                         <label for="formGroupExampleInput">Nama Varietas</label>
                         <select class="form-control" name="nama_varietas">
                             @foreach($varietas as $varietas)
-                            <option value="{{$varietas->id}}" {{$varietas->id == $detail->id_varietas_padi ? 'selected' : ''}}>{{$varietas->nama_varietas}}</option>
+                                <option value="{{$varietas->id}}" {{$varietas->id == $detail->id_varietas_padi ? 'selected' : ''}}>{{$varietas->nama_varietas}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Stok</label>
-                        <input type="text" class="form-control" id="jumlah_stok" name="jumlah_stok" value="{{ $detail->jumlah_stok }}" />
+                        <input type="number" class="form-control" id="jumlah_stok" name="jumlah_stok" value="{{ $detail->jumlah_stok }}" />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Tanggal Beli</label>
@@ -45,15 +45,15 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Harga Benih</label>
-                        <input type="text" class="form-control" id="harga_beli_sak" name="harga_beli_sak" value="{{ $detail->harga_beli_sak }}" />
+                        <input type="number" class="form-control" id="harga_beli_sak" name="harga_beli_sak" value="{{ $detail->harga_beli_sak }}" />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Harga Jual</label>
-                        <input type="text" class="form-control" id="harga_jual_sak" name="harga_jual_sak" value="{{ $detail->harga_jual_sak }}" />
+                        <input type="number" class="form-control" id="harga_jual_sak" name="harga_jual_sak" value="{{ $detail->harga_jual_sak }}" />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Harga Jual/Kg</label>
-                        <input type="text" class="form-control" id="harga_jual_kg" name="harga_jual_kg" value="{{ $detail->harga_jual_kg }}" />
+                        <input type="number" class="form-control" id="harga_jual_kg" name="harga_jual_kg" value="{{ $detail->harga_jual_kg }}" />
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-10">
