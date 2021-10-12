@@ -1,7 +1,7 @@
 @extends('layouts.appnavbar')
-
 @section('tittle','Tambah Pengguna')
 @section('content')
+
 <div class="container mb-2 mt-0">
     <div class="col-md-12">
         <div class="card mb-2">
@@ -41,7 +41,7 @@
                                     <td>{{$hasil->kesimpulan}}</td>
                                     @if(Auth::user()->role == "admin")
                                     <td>
-                                    <a href="{{url('admin/cetak/pendahuluan/'.$hasil->id)}}" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
+                                        <a href="{{url('admin/cetak/pendahuluan/'.$hasil->id)}}" class="btn btn-success btn-md"><i class="fas fa-print"></i></a>
                                     </td>
                                     @endif
                                 </tr>

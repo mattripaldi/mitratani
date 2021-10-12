@@ -15,9 +15,9 @@ class CreateVarietasPadisTable extends Migration
     {
         Schema::create('varietas_padis', function (Blueprint $table) {
             $table->id();
-            $table->String('nama_varietas');
-            $table->String('deskripsi_varietas');
-            $table->String('foto_varietas');
+            $table->string('nama_varietas');
+            $table->string('deskripsi_varietas');
+            $table->string('foto_varietas');
             $table->timestamps();
         });
     }

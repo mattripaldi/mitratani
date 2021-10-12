@@ -22,7 +22,7 @@ class CreatePemeriksaanAwalsTable extends Migration
             $table->string('isolasi')->default('salah');
             $table->string('sejarah_lapang')->default('salah');
             $table->string('asal_jumlah_benih')->default('salah');
-            $table->text('catatan')->default('Tanam Benih Sesuai Rencana');
+            $table->text('catatan')->nullable();
             $table->string('kesimpulan')->nullable();
             $table->timestamps();
         });

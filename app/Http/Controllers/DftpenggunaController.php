@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
 
 class dftpenggunaController extends Controller
 {
@@ -30,7 +30,7 @@ class dftpenggunaController extends Controller
         $data = User::where('id',$id)->first();
         return view('detailpengguna', compact('data'));
     }
-   
+
     public function cari(Request $request)
     {
         $cari = $request->input('cari');
@@ -71,7 +71,7 @@ class dftpenggunaController extends Controller
             'jenis_kelamin' => 'required',
             'foto' => 'mimes:jpeg,png,jpg,gif',
             'password' => 'required',
-            'role' => 'required', 
+            'role' => 'required',
         ]);
         if($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -134,15 +134,15 @@ class dftpenggunaController extends Controller
         $pengguna->jenis_kelamin = $request->jenis_kelamin;
         $pengguna->role = $request->role;
         $pengguna->save();
-        
+
         if($request->hasFile('foto')) {
-            
+
             $file = $request->file('foto');
             $file->move('images',$file->getClientOriginalName());
             User::findorfail($id)->update(["foto"=>$file->getClientOriginalName()]);
 
         }
-        
+
         return redirect('admin/home');
     }
 

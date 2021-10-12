@@ -6,27 +6,24 @@
 @if($hasil)
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <form action="{{url('admin/updatestatusfase/'.$hasil->id)}}" id="updatestatus" method="post">
-        @csrf
-            <label for="" class="form-label">Status</label>
-            <select name="status_pemeriksaan" id="" class="form-control">
-                <option value="lulus">Lulus</option>
-                <option value="tidak lulus">Tidak Lulus</option>
-            </select>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"
-        onclick="document.getElementById('updatestatus').submit()"
-        >Simpan</button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="{{url('admin/updatestatusfase/'.$hasil->id)}}" id="updatestatus" method="post">
+                    @csrf
+                    <label for="" class="form-label">Status</label>
+                    <select name="status_pemeriksaan" id="" class="form-control">
+                        <option value="lulus">Lulus</option>
+                        <option value="tidak lulus">Tidak Lulus</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('updatestatus').submit()">Simpan</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 @endif
 
@@ -54,16 +51,13 @@
                                     <th scope="col">Jumlah Contoh Pemeriksaan</th>
                                     <th scope="col">Inbrida</th>
                                     <th scope="col">Status</th>
-                                   
                                 </tr>
-                                
                             </thead>
 
                             <tbody>
-
                                 @if($hasil)
                                 <tr>
-                                <td>{{$hasil->pemeriksaanawal->pesanan->lahan_pelanggan->nama_lahan}}</td>
+                                    <td>{{$hasil->pemeriksaanawal->pesanan->lahan_pelanggan->nama_lahan}}</td>
                                     <td>{{$hasil->pemeriksaanawal->pesanan->lahan_pelanggan->alamat}}</td>
                                     <td>{{$hasil->isolasi_timur}}</td>
                                     <td>{{$hasil->barier}}</td>
@@ -77,42 +71,36 @@
                                     <td>
                                         <!-- Button trigger modal -->
                                         <span class="badge badge-warning">
-                                        {{$hasil->status_pemeriksaan == null ? "Belum Divalidasi" : $hasil->status_pemeriksaan}}
-                                        </span>                                  
+                                            {{$hasil->status_pemeriksaan == null ? "Belum Divalidasi" : $hasil->status_pemeriksaan}}
+                                        </span>
                                     </td>
-                        
                                 </tr>
                                 <tr>
                                     <td colspan="12">
-                                        <img src="{{asset('storage/monitorings/'.$hasil->foto_monitoring)}}" alt="">
+                                        <img src="{{asset('storage/monitorings/'.$hasil->foto_monitoring)}}" alt="" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="13">
-                                    @if(Auth::user()->role == "pimpinan")
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        @if(Auth::user()->role == "pimpinan")
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                                             Validasi
-                                    </button>
-                                    @endif
+                                        </button>
+                                        @endif
                                     </td>
-                                    </tr>
+                                </tr>
                                 @if(Auth::user()->role == "admin")
                                 <tr>
                                     <td colspan="13">
-                                <a href="{{url('/admin/cetak/vegetatif/'.$hasil->pemeriksaan_awal_id)}}" class="btn btn-success btn-sm float-right"> <i class="fas fa-print"></i> Cetak</a>
+                                        <a href="{{url('/admin/cetak/vegetatif/'.$hasil->pemeriksaan_awal_id)}}" class="btn btn-success btn-sm float-right"> <i class="fas fa-print"></i> Cetak</a>
                                     </td>
                                 </tr>
-                                @endif
-                                @else
+                                @endif @else
                                 <tr>
                                     <td colspan="12">No Data</td>
                                 </tr>
                                 @endif
-                                
- 
-                                
                             </tbody>
-
                         </table>
                     </div>
                 </div>
