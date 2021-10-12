@@ -43,6 +43,7 @@ class DftbenihpadiController extends Controller
 
         return view('dftbenihpadi', compact('stok'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
