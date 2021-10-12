@@ -14,7 +14,7 @@
                     <input type="hidden" name="_method" value="PUT" />
                     <div class="form-group">
                         <label for="formGroupExampleInput">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $detail->nama_lengkap) }}" required />
+                        <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $detail->nama_lengkap) }}" required />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Nik</label>
@@ -22,23 +22,23 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Username</label>
-                        <input id="name" type="text" class="form-control @error('username') is-invalid @enderror" name="name" value="{{ old('name', $detail->name) }}" required autocomplete="name" />
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $detail->name) }}" required autocomplete="name" />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Password</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
+                        <input id="password" type="password" class="form-control" name="password" autocomplete="new-password" />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat', $detail->alamat) }}" required />
+                        <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat', $detail->alamat) }}" required />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Telepon</label>
-                        <input type="text" class="form-control" id="telepon" name="telepon" value="{{ old('telepon', $detail->telepon) }}" required />
+                        <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="telepon" name="telepon" value="{{ old('telepon', $detail->telepon) }}" required />
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Jenis Kelamin</label>
-                        <select id="jenis_kelamin" class="form-control" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}" required>
+                        <select id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}" required>
                             <option selected disabled hidden>Jenis Kelamin</option>
                             <option value="laki-laki" {{ $detail->jenis_kelamin == 'laki-laki' ? 'selected' : '' }}>Laki-Laki</option>
                             <option value="perempuan" {{ $detail->jenis_kelamin == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Role</label>
-                        <select id="role" class="form-control" name="role" value="{{ old('role') }}" required>
+                        <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required>
                             <option selected disabled hidden>Role</option>
                             <option value="admin" {{ $detail->role == 'admin' ? 'selected' : '' }}>Admin</option>
                             <option value="pimpinan" {{ $detail->role == 'pimpinan' ? 'selected' : '' }}>Pimpinan</option>

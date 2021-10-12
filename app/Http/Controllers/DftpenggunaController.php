@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class dftpenggunaController extends Controller
 {
@@ -38,20 +39,6 @@ class dftpenggunaController extends Controller
 
         return view('dftpengguna', compact('user'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
-
 
 
     /**
@@ -62,7 +49,7 @@ class dftpenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required',
             'nik' => 'required',
             'nama_lengkap' => 'required',
@@ -73,21 +60,27 @@ class dftpenggunaController extends Controller
             'password' => 'required',
             'role' => 'required',
         ]);
-        if($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $file->move('images',$file->getClientOriginalName());
-        User::create([
+
+        $user = User::create([
             'name' => $request->name,
             'nik' => $request->nik,
             'nama_lengkap' => $request->nama_lengkap,
             'alamat' => $request->alamat,
             'telepon' => $request->telepon,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'foto' => $file->getClientOriginalName(),
-            'password' => bcrypt($request->get('password')),
+            'password' => Hash::make($request->get('password')),
             'role' => $request->role,
         ]);
-    }
+
+        if($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $file->move('images',$file->getClientOriginalName());
+
+            $user->update([
+                'foto' => $file->getClientOriginalName(),
+            ]);
+        }
+
         return redirect('/admin/home');
     }
 
@@ -124,8 +117,18 @@ class dftpenggunaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pengguna = User::findorfail($id);
+        $request->validate([
+            'name' => 'required',
+            'nik' => 'required',
+            'nama_lengkap' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'jenis_kelamin' => 'required',
+            'foto' => 'mimes:jpeg,png,jpg,gif',
+            'role' => 'required',
+        ]);
 
+        $pengguna = User::findorfail($id);
         $pengguna->nama_lengkap = $request->nama_lengkap;
         $pengguna->nik = $request->nik;
         $pengguna->name = $request->name;
@@ -135,12 +138,18 @@ class dftpenggunaController extends Controller
         $pengguna->role = $request->role;
         $pengguna->save();
 
-        if($request->hasFile('foto')) {
+        if($request->password) {
+            $pengguna->update([
+                'password' => Hash::make($request->get('password')),
+            ]);
+        }
 
+        if($request->hasFile('foto')) {
             $file = $request->file('foto');
             $file->move('images',$file->getClientOriginalName());
-            User::findorfail($id)->update(["foto"=>$file->getClientOriginalName()]);
 
+            User::findorfail($id)
+                ->update(["foto"=>$file->getClientOriginalName()]);
         }
 
         return redirect('admin/home');
