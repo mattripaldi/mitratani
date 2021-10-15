@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'jenis_kelamin' => 'laki-laki',
             'role' => 'admin',
             'password'	=> Hash::make('12345678'),
+            'foto' => 'test.png'
         ]);
     }
 }
