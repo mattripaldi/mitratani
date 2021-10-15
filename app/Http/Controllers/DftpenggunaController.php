@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class dftpenggunaController extends Controller
+class DftpenggunaController extends Controller
 {
     /**
      * Display a listing of the resource.
