@@ -56,7 +56,7 @@ class dftpenggunaController extends Controller
             'alamat' => 'required',
             'telepon' => 'required',
             'jenis_kelamin' => 'required',
-            'foto' => 'mimes:jpeg,png,jpg,gif',
+            'foto' => 'required|mimes:jpeg,png,jpg,gif',
             'password' => 'required',
             'role' => 'required',
         ]);
@@ -124,7 +124,7 @@ class dftpenggunaController extends Controller
             'alamat' => 'required',
             'telepon' => 'required',
             'jenis_kelamin' => 'required',
-            'foto' => 'mimes:jpeg,png,jpg,gif',
+            'foto' => 'required|mimes:jpeg,png,jpg,gif',
             'role' => 'required',
         ]);
 
