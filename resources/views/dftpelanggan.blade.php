@@ -32,9 +32,9 @@
                         @foreach($pelanggan as $pelanggan)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$pelanggan->name}}</td>
-                                <td>{{$pelanggan->nik}}</td>
                                 <td>{{$pelanggan->nama_lengkap}}</td>
+                                <td>{{$pelanggan->nik}}</td>
+                                <td>{{$pelanggan->name}}</td>
                                 <td>{{$pelanggan->alamat}}</td>
                                 <td>{{$pelanggan->telepon}}</td>
                                 <td>{{$pelanggan->jenis_kelamin}}</td>

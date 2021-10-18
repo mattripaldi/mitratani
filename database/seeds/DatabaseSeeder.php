@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
+            'id' => 1,
             'name'	=> 'admin',
             'nik' => '123123123',
             'nama_lengkap' => 'Administrator',
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'jenis_kelamin' => 'laki-laki',
             'role' => 'admin',
             'password'	=> Hash::make('12345678'),
+            'foto' => 'test.png'
         ]);
     }
 }
