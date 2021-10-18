@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <form action="{{url('admin/updatestatusfase/'.$hasil->id)}}" id="updatestatus" method="POST">
                         @csrf
-                        @method('PUT')
+                        {{-- @method('PUT') --}}
                         <label for="" class="form-label">Status</label>
                         <select name="status_pemeriksaan" id="" class="form-control">
                             <option value="lulus">Lulus</option>

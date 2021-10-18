@@ -18,7 +18,7 @@ Route::group(['middleware'=>['auth']],function () {
         Route::get('cetak/vegetatif/{id}','cetakExcelController@vegetatif');
         Route::get('cetak/masak/{id}','cetakExcelController@masak');
         Route::get('cetak/berbunga/{id}','cetakExcelController@berbunga');
-        Route::put('updatestatusfase/{id}','HasilMonitoringController@updatestatus');
+        Route::post('updatestatusfase/{id}','HasilMonitoringController@updatestatus');
 
         // pengguna
         Route::get('/home','DftpenggunaController@index');
