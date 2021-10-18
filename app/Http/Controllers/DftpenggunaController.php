@@ -64,7 +64,7 @@ class DftpenggunaController extends Controller
         $file = $request->file('foto');
         $file->move('images',$file->getClientOriginalName());
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'nik' => $request->nik,
             'nama_lengkap' => $request->nama_lengkap,
