@@ -14,7 +14,6 @@ class HasilmonitoringController extends Controller
      */
     public function index()
     {
-    
         $hasils = PemeriksaanAwal::join('pesanans',"pesanans.id",
         'pemeriksaan_awals.pesanan_id')
         ->with('pesanan.lahan_pelanggan')
@@ -63,12 +62,13 @@ class HasilmonitoringController extends Controller
 
     public function updatestatus($id, Request $request)
     {
+
         pemeriksaan_lanjut::where('id','=',$id)
-        ->update(["status_pemeriksaan"=>$request->status_pemeriksaan]);
+                    ->update(["status_pemeriksaan"=>$request->status_pemeriksaan]);
 
         return redirect()->back();
     }
-   
+
 
     /**
      * Show the form for creating a new resource.

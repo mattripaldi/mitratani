@@ -9,8 +9,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form action="{{url('admin/updatestatusfase/'.$hasil->id)}}" id="updatestatus" method="post">
+                <form action="{{url('admin/updatestatusfase/'.$hasil->id)}}" id="updatestatus" method="POST">
                     @csrf
+                    @method('PUT')
                     <label for="" class="form-label">Status</label>
                     <select name="status_pemeriksaan" id="" class="form-control">
                         <option value="lulus">Lulus</option>
