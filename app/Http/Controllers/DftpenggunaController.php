@@ -61,6 +61,9 @@ class DftpenggunaController extends Controller
             'role' => 'required',
         ]);
 
+        $file = $request->file('foto');
+        $file->move('images',$file->getClientOriginalName());
+
         $user = User::create([
             'name' => $request->name,
             'nik' => $request->nik,
@@ -70,16 +73,8 @@ class DftpenggunaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'password' => Hash::make($request->get('password')),
             'role' => $request->role,
+            'foto' => $file->getClientOriginalName(),
         ]);
-
-        if($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $file->move('images',$file->getClientOriginalName());
-
-            $user->update([
-                'foto' => $file->getClientOriginalName(),
-            ]);
-        }
 
         return redirect('/admin/home');
     }
