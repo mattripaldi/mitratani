@@ -13,7 +13,7 @@ Auth::routes(['register'=> false]);
 
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
-});
+})->name('privacy-policy');
 
 Route::group(['middleware'=>['auth']],function () {
     Route::prefix('admin')->group(function(){
