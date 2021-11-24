@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container mx-auto mb-2 mt-0">
-    <h1>Kebijakan Privasi</h1>
+    <h1 style="text-align: center; margin-bottom: 30px;">Kebijakan Privasi</h1>
     <p>Selamat datang di Mitra Tani store,
         Dengan menggunakan layanan Aplikasi Web Mitra Tani Store dan Aplikasi Android Rojo Tani maka Anda setuju untuk terikat kepada syarat-syarat dan ketentuan berikut ini mengenai kebijakan privasi yang ditetapkan oleh Mitra Tani. Silahkan melakukan pengecekan berkala terhadap aplikasi kami untuk mendapatkan perubahan terbaru dan kemungkinan perubahan syarat dan kondisi sewaktu-waktu dari Kami.
         </p>
